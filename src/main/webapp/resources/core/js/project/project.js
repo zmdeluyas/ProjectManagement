@@ -289,6 +289,7 @@ function insertProj(){
 				projInfra: JSON.stringify(projInfra),
 				projCost: JSON.stringify(projCost)
 			},
+			async: false,
 			success : function(result) {
 				$('#projNo').val(padLeft(result, 6));
 				$('#saveProjNo').html('Project No. ' + padLeft(result, 6) + '  successfully saved!');
@@ -487,6 +488,7 @@ function submitProject(){
 			url : contextPath + "/project/submit",
 			method : "POST",
 			data : prepareProjInfo(),
+			async: false,
 			success : function(result) {
 				if(result == 'success'){
 					loadProjStatusMain('projadtlinfo-div', projInfo.projNo);
@@ -517,6 +519,7 @@ function approveProject(){
 			method : "POST",
 			//data : prepareApprvReqProjInfo(),
 			data : projInfo,
+			async: false,
 			success : function(result) {
 				if(result == 'success'){
 					disableProjSave(true);
@@ -571,6 +574,7 @@ function loadProjStatusMain(afterDiv, projNo){
 		$.ajax({
 			url : contextPath + "/project/statusmain?projNo="+projNo,
 			method : "GET",
+			async: false,
 			success : function(result) {
 				if(afterDiv != null){
 					$($afterdiv).after(result);
@@ -763,6 +767,7 @@ function updateProjHist(psNoDone, psNoStart, psNoStartLastTag){
 	        data: {
 	        	param: JSON.stringify(obj)
 	        },
+	        async: false,
 			success : function(result) {
 				projHist = result;
 			},
@@ -784,7 +789,7 @@ function makeFieldsUneditable() {
 	$('#projStatus').attr('readonly', true);
 	//
 	
-	if (projApproved == 1) {
+	if (projApproved == 1 && req_type == 1) {
 		$('#projPSD').prop('readonly', true);
 		$('#projPFD').prop('readonly', true);
 		$('#projASD').prop('readonly', true);
@@ -850,6 +855,7 @@ function createVM(){
 			repoParam: JSON.stringify(repParam),
 			reqNo: $('#reqNo').val()
 		},
+		async: false,
 		success: function(response){
 			if(response == "success"){
 				console.log("creating repository....");
