@@ -14,7 +14,6 @@ function createRequest(){
 }
 
 function createProjRequest(){
-	console.log('funtion here');
 	loadReqInfo(null, null, 'createProjReq');
 	loadProjInfo('reqinfo-div', null, 'addProj');
 	loadProjAdtlInfo('projinfo-div');
@@ -277,6 +276,7 @@ function insertRequest(){
 			url : contextPath + "/request/save",
 			method : "POST",
 			data : prepareRequestInfo(),
+			async: false,
 			success : function(result) {
 				if(result.status == 'SUCCESS'){
 					$('#reqNo').val(padLeft(result.reqNo, 8));
@@ -303,6 +303,7 @@ function insertProjRequest(){
 			url : contextPath + "/request/saveproj",
 			method : "POST",
 			data : prepareProjRequestInfo(),
+			async: false,
 			success : function(result) {
 //				if(result.status == 'SUCCESS'){
 //					$('#reqNo').val(padLeft(result.reqNo, 8));
@@ -329,6 +330,7 @@ function approveRequest(){
 			url : contextPath + "/request/approve",
 			method : "POST",
 			data : prepareRequestInfo(),
+			async: false,
 			success : function(result) {
 				//if (checkErrorOnResponse(result)) {
 				if(result == 'success'){
@@ -341,10 +343,10 @@ function approveRequest(){
 					disableReqSave(true);
 					setTimeout(function(){
 						changeReqStatus(2);
-					},3000)
+					},2000)
 					setTimeout(function(){ //SHA
 						reqStatusTimer();
-					}, 5000);
+					}, 3000);
 				}
 				//}
 			},
@@ -438,6 +440,7 @@ function loadReqStatusMain(afterDiv, reqNo){
 		$.ajax({
 			url : contextPath + "/request/statusmain?reqNo="+reqNo,
 			method : "GET",
+			async: false,
 			success : function(result) {
 				//if (checkErrorOnResponse(result)) {
 				if(afterDiv != null){
@@ -664,6 +667,7 @@ function getUpdatedReqHist(){
 	        data: {
 	        	reqNo : parseInt($('#reqNo').val())
 	        },
+	        async: false,
 			success : function(result) {
 				reqUpdatedHist = result;
 			},
@@ -704,6 +708,7 @@ function updateReqHist(rsNoDone, rsNoStart, rsNoStartLastTag){
 	        data: {
 	        	param: JSON.stringify(obj)
 	        },
+	        async: false,
 			success : function(result) {
 				reqHist = result;
 			},
