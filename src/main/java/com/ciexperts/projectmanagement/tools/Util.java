@@ -53,6 +53,9 @@ public class Util {
 		case "it staff":
 			access = "is";
 			break;
+		case "operation manager":
+			access = "op";
+			break;
 		default:
 			break;
 		}

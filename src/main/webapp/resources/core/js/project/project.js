@@ -188,6 +188,15 @@ function loadUpdateProj(projNo){
 		//$('#grpbtnApproval').removeClass('hide');
 		//$('#projSaveBtn').addClass('hide');
 	}
+	
+	if(current_dashboard == 'deployment'){
+		makeFieldsUneditable();
+		$('#projcost-col').remove();
+		//$('#grpbtnApproval').removeClass('hide');
+		//$('#projSaveBtn').addClass('hide');
+	}else{
+		$('#deployment-col').remove();
+	}
 	$back.removeClass('hide');
 }
 
