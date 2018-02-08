@@ -179,8 +179,8 @@ function loadAddProj(){
 function loadUpdateProj(projNo){
 	loadProjInfo(null, projNo, 'updateProj');
 	loadProjAdtlInfo('projinfo-div', projNo);
+	makeFieldsUneditable();
 	if(useraccess == 'bu'){
-		makeFieldsUneditable();
 		$('#projInfra').remove();
 		$('#projcost-col').removeClass("col-xs-6");
 		$('#projcost-col').addClass("col-xs-12");
@@ -794,13 +794,17 @@ function makeFieldsUneditable() {
 		$('#projPFD').prop('readonly', true);
 		$('#projASD').prop('readonly', true);
 		$('#projACD').prop('readonly', true);
-		$('#seachProjRegion').prop('disabled', true);
+		$('#seachProjRegion').addClass("hide");
 		$('#projRegion').removeClass('common-editable-fields');
 		$('#projPhase').attr('disabled', 'disabled');
 		$('#projTotBudget').prop('readonly', true);
 		$('#reqDesc').prop('readonly', true);
-		$("#projadtlinfo-div span").prop('disabled', true);
-		$("#reqinfo-div span").prop('disabled', true);
+		//$("#projadtlinfo-div span").prop('disabled', true);
+		//$("#projinfo-div span").prop('disabled', true);
+		$("#projinfo-div span").addClass('hide');
+		//$("#reqinfo-div span").prop('disabled', true);
+		$("#seachDeveloper,#searchBA,#searchQA,#searchOPs").addClass("hide");
+		$("#projInfra span").addClass("hide");
 		// project infrastructure fields
 		$('#projOS').removeClass('common-editable-fields');
 		$('#projMW').removeClass('common-editable-fields');
@@ -812,8 +816,12 @@ function makeFieldsUneditable() {
 		$('#projMemory').prop('disabled', true);
 	} else {
 		if (useraccess == "bu") {
-			$("#projadtlinfo-div span").prop('disabled', true);
-			$("#reqinfo-div span").prop('disabled', true);
+			//$("#projadtlinfo-div span").prop('disabled', true);
+			$('#seachProjRegion').addClass("hide");
+//			$("#reqinfo-div span").prop('disabled', true);
+			$("#seachDeveloper,#searchBA,#searchQA,#searchOPs").addClass("hide");
+			$("#projInfra span").addClass("hide");
+			$("#projinfo-div span").addClass('hide');
 			// project infrastructure fields
 			$('#projOS').removeClass('common-editable-fields');
 			$('#projMW').removeClass('common-editable-fields');
