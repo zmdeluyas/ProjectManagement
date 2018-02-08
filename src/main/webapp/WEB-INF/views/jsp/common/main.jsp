@@ -6,10 +6,10 @@
 	</div>
 </div>
 <script>
-	initdashboard();
-	if(nvl(current_dashboard, '') == '') loadProjectList();
 	username = '${appUser.username}';
 	fullName = '${appUser.fullName}';
 	useraccess = '${appUser.access}';
+	initdashboard();
+	if(nvl(current_dashboard, '') == '') loadProjectList();
 	setHeader();
 </script>

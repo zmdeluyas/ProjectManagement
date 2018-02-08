@@ -3,6 +3,7 @@ package com.ciexperts.projectmanagement.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -10,6 +11,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import com.ciexperts.projectmanagement.entity.Project;
 import com.ciexperts.projectmanagement.entity.Request;
 import com.ciexperts.projectmanagement.entity.RequestHistory;
 import com.ciexperts.projectmanagement.entity.RequestStatus;
@@ -37,6 +39,30 @@ public class RequestDao {
 			session.close();
 		}
 		return requests;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<RequestStatus> listRequestStatusByParam(RequestStatus params) {
+		session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = null;
+		List<RequestStatus> reqList = null;
+		
+		try {
+			tx = session.beginTransaction();
+			Criteria crReqStatus = session.createCriteria(RequestStatus.class);
+			if(params.getStatusName() != null || params.getStatusName().equals("")){
+				crReqStatus.add(Restrictions.eq("statusName", params.getStatusName())).list();
+			}
+			reqList = crReqStatus.list();
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return reqList;
 	}
 
 	public Integer insertRequest(Request request) {
@@ -132,6 +158,30 @@ public class RequestDao {
 			session.close();
 		}
 		return reqHist;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<RequestHistory> listReqHistByParam(RequestHistory reqHistoryParam) {
+		session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = null;
+		List<RequestHistory> reqHistList = new ArrayList<>();
+		try {
+			tx = session.beginTransaction();
+			Criteria cr = session.createCriteria(RequestHistory.class);
+			if(reqHistoryParam.getRsNo() != null){
+				cr.add(Restrictions.eq("rsNo", reqHistoryParam.getRsNo())).list();
+				cr.add(Restrictions.eq("status", reqHistoryParam.getStatus())).list();
+			}
+			reqHistList = cr.list();
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return reqHistList;
 	}
 
 	public Integer insertRequestHistory(RequestHistory reqHist) {
