@@ -221,6 +221,16 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-xs-6" id="deployment-col">
+			<div class="panel panel-primary box">
+				<div class="panel-heading box">Deployment</div>
+				<div class="panel-body">
+					<div class="container-fluid">
+						<div class="row top163"></div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<div id="additionalInformation-div">

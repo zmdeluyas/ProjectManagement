@@ -54,6 +54,7 @@ function openReqInfo(reqNo, projNo){
 	loadProjAdtlInfo('projinfo-div', projNo);
 	loadReqInfo('projadtlinfo-div', reqNo);
 	makeFieldsUneditable(); //SHA
+	$('#deployment-col').remove();
 	$("#additionalInformation-div").remove();
 	loadReqStatusMain('reqinfo-div', reqNo);
 	$back.removeClass('hide');

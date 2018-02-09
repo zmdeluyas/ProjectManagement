@@ -1,5 +1,6 @@
 var $dashboard_body;
 var $dashboard_projects;
+var $dashboard_deployments;
 var $dashboard_requests;
 var $dashboard_history;
 var current_dashboard;
@@ -11,11 +12,21 @@ var useraccess;
 function initdashboard(){
 	$dashboard_body = $('#dashboard-body');
 	$dashboard_projects = $('#dashboard-projects');
+	$dashboard_deployments = $('#dashboard-deployments');
 	$dashboard_requests = $('#dashboard-requests');
 	$dashboard_history = $('#dashboard-history');
 	
+	if(useraccess == 'op'){
+		$dashboard_deployments.addClass('show');
+	}else{
+		$dashboard_deployments.addClass('hide');
+	}
+	
 	$dashboard_projects.click(function(){
 		loadProjectList();
+	});
+	$dashboard_deployments.click(function(){
+		loadDeploymentList();
 	});
 	$dashboard_requests.click(function(){
 		loadRequestList();
@@ -24,6 +35,7 @@ function initdashboard(){
 
 function removeCurrDashboard(){
 	$dashboard_projects.removeClass("current-dashboard");
+	$dashboard_deployments.removeClass("current-dashboard");
 	$dashboard_requests.removeClass("current-dashboard")
 	$dashboard_history.removeClass("current-dashboard")
 }
@@ -33,12 +45,37 @@ function loadProjectList(){
 		$.ajax({
 			url : contextPath + "/project/page",
 			method : "GET",
+			data : {
+				dashboard: "projects",
+			},
 			success : function(result) {
 				//if (checkErrorOnResponse(result)) {
 				$dashboard_body.html(result);
 				removeCurrDashboard();
 				$dashboard_projects.addClass("current-dashboard");
 				current_dashboard = 'project';
+				//}
+			},
+		});
+	} catch (e) {
+		alert( 'loadProjectList - ' + e);
+	}
+}
+
+function loadDeploymentList(){
+	try {
+		$.ajax({
+			url : contextPath + "/deployment/page",
+			method : "GET",
+			data : {
+				dashboard: "deployments",
+			},
+			success : function(result) {
+				//if (checkErrorOnResponse(result)) {
+				$dashboard_body.html(result);
+				removeCurrDashboard();
+				$dashboard_deployments.addClass("current-dashboard");
+				current_dashboard = 'deployment';
 				//}
 			},
 		});
@@ -108,6 +145,8 @@ function initCommons(){
 		loadMainPage();
 		if(current_dashboard == 'project'){
 			loadProjectList();
+		}else if(current_dashboard == 'deployment'){
+			loadDeploymentList();
 		}else if(current_dashboard == 'request'){
 			loadRequestList();
 		}else if(current_dashboard == 'history'){
