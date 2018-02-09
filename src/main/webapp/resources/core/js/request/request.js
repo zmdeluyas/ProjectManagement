@@ -18,6 +18,7 @@ function createProjRequest(){
 	loadReqInfo(null, null, 'createProjReq');
 	loadProjInfo('reqinfo-div', null, 'addProj');
 	loadProjAdtlInfo('projinfo-div');
+	$('#deployment-col').remove();
 	setFieldsToEditable();
 	$back.removeClass('hide');
 	userPreviliges();
@@ -720,4 +721,20 @@ function getRSTimerSec(rsNo){
 			return obj[x].sec;
 		}
 	}
+}
+
+//NEW -Ronnie
+function openReqInfo(reqNo, projNo, type){
+	loadProjInfo(null, projNo, 'openReqInfo');
+	loadProjAdtlInfo('projinfo-div', projNo);
+	loadReqInfo('projadtlinfo-div', reqNo);
+	makeFieldsUneditable(); //SHA
+	if(type == "deployment"){
+		$('#projcost-col').remove();
+	}else{
+		$('#deployment-col').remove();
+	}
+	$("#additionalInformation-div").remove();
+	loadReqStatusMain('reqinfo-div', reqNo);
+	$back.removeClass('hide');
 }

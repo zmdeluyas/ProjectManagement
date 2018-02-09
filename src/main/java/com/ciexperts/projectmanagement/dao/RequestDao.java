@@ -168,10 +168,12 @@ public class RequestDao {
 		try {
 			tx = session.beginTransaction();
 			Criteria cr = session.createCriteria(RequestHistory.class);
-			if(reqHistoryParam.getRsNo() != null){
+			if(reqHistoryParam.getRsNo() != null)
 				cr.add(Restrictions.eq("rsNo", reqHistoryParam.getRsNo())).list();
+			
+			if(reqHistoryParam.getStatus() != null && !reqHistoryParam.getStatus().equals(""))
 				cr.add(Restrictions.eq("status", reqHistoryParam.getStatus())).list();
-			}
+			
 			reqHistList = cr.list();
 			tx.commit();
 		} catch (HibernateException e) {

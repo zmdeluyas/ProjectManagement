@@ -6,19 +6,25 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
+
 import javax.xml.bind.DatatypeConverter;
 import com.ciexperts.projectmanagement.entity.JenkinsRepoParam;
 import com.ciexperts.projectmanagement.entity.Project;
 import com.ciexperts.projectmanagement.entity.ProjectInfra;
 import com.ciexperts.projectmanagement.entity.Request;
+import com.ciexperts.projectmanagement.entity.RequestHistory;
+import com.ciexperts.projectmanagement.entity.RequestStatus;
 import com.ciexperts.projectmanagement.entity.User;
 import com.ciexperts.projectmanagement.entity.VMConfig;
+import com.ciexperts.projectmanagement.tools.ExceptionResolver;
 
 public class JenkinsService {
 
 	private ProjectService projService = new ProjectService();
 	private RequestService reqService = new RequestService();
 	private UserService userService = new UserService();
+	private ExceptionResolver exception;
 	private static String baseUrl = "http://192.10.10.221:8080";
 	
 	public String triggerVMCreation(VMConfig vmCon, JenkinsRepoParam repoParam, String reqNo){
@@ -100,6 +106,56 @@ public class JenkinsService {
 		}
 		
 		return result;
+	}
+	
+	public ExceptionResolver updateReqStatus(String paramReqNo, Integer currRsNo){
+		exception = new ExceptionResolver();
+		Integer reqNo = null;
+		Integer nextRsNo = null;
+		Integer prevRsNo = null;
+		Integer rhNo = null;
+		String nextRsLastTag = "";
+		String prevReqStatus = "";
+		
+		try {
+			reqNo = Integer.parseInt(paramReqNo);
+			prevRsNo = currRsNo - 1;
+			nextRsNo = currRsNo + 1;
+			
+			List<RequestHistory> reqHistList = reqService.listReqHist(reqNo);
+			for (int i = 0; i < reqHistList.size(); i++) {
+				if (reqHistList.get(i).getRsNo() == (prevRsNo)){
+					prevReqStatus = reqHistList.get(i).getStatus();
+				}
+				
+				if (reqHistList.get(i).getRsNo() == currRsNo) {
+					rhNo = reqHistList.get(i).getRhNo();
+				}
+	
+			}
+			
+			List<RequestStatus> reqStatusList = reqService.reqStatus();
+			for (int i = 0; i < reqStatusList.size(); i++) {
+				if (reqStatusList.get(i).getRsNo() == nextRsNo) {
+					nextRsLastTag = reqStatusList.get(i).getLastTag();
+				}
+			}
+			
+			if (!(prevReqStatus.equals("On-going"))) {
+				reqService.saveReqHist(reqNo, rhNo, currRsNo, nextRsNo, nextRsLastTag);
+				exception.setRespResult("success");
+				exception.setRespMessage("Reqeuest status updated successfully ");
+			} else {
+				exception.setRespResult("failed");
+				exception.setRespMessage("Cannot update the request status, previous process still On-going ");
+			}
+			
+		} catch (NumberFormatException e) {
+			System.out.println(e.getMessage());
+			exception.setRespResult("failed");
+			exception.setRespMessage("Number format exception - ");
+		}
+		return exception;
 	}
 
 }

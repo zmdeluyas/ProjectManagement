@@ -48,17 +48,8 @@ function initRequestList(){
 	});
 }
 
-//NEW -Ronnie
-function openReqInfo(reqNo, projNo){
-	loadProjInfo(null, projNo, 'openReqInfo');
-	loadProjAdtlInfo('projinfo-div', projNo);
-	loadReqInfo('projadtlinfo-div', reqNo);
-	makeFieldsUneditable(); //SHA
-	$('#deployment-col').remove();
-	$("#additionalInformation-div").remove();
-	loadReqStatusMain('reqinfo-div', reqNo);
-	$back.removeClass('hide');
-}
+
+
 
 //ARVIC
 var $devpopuptb;

@@ -38,7 +38,6 @@ public class DeploymentController {
 		// model.addObject("projectList", gson.toJson(ResponseFormatter.escapeHTMLInList(projectService.getProjList("list"))));
 		//	EDIT: RJVILLARUZ
 		model.addObject("deploymentList", gson.toJson(ResponseFormatter.escapeHTMLInList(deploymentService.getListForDeployment())));
-		System.err.println(model + "   modeeellllllllllllllll");
 		return model;
 	}
 	
