@@ -6,33 +6,23 @@ function initDeploymentList(){
 	$deploymentlist.dataTable({
 		data: deploymentlist,
 		columns: [{
-			data: 'projNo'
+			data: 'reqNo'
 		}, {
-			data: 'name'
+			data: 'summary'
 		}, {
-			data: 'businessUnit'
+			data: 'projNoName'
 		}, {
-			data: 'desc'
+			data: 'dateSubmitted'
 		}, {
 			data: 'status'
-		}, {
-			data: 'health',
-			render : function(data, type, row) {
-				if ( data == 'Completed' ){
-					return '<span class="img-responsive proj-health health-g" title="1"></span>';
-				}else if ( data == 'Failed' ){
-					return '<span class="img-responsive proj-health health-r" title="3"></span>';
-				}else if ( data == 'On-going' ){
-					return '<span class="img-responsive proj-health health-y" title="2"></span>';
-				}
-				return '<span class="img-responsive proj-health"></span>';
-			},
-			type: 'alt-numeric'
 		}],
 		columnDefs : [ {
-			targets : [ 0, 5 ],
+			targets : [ 0 ],
 			width : "58px",
 			className : "text-center"
+		},{
+			targets : [ 3 ]/*,
+			type : "date-eu"*/
 		} ],
 	     bLengthChange: false,
 	     language: {
@@ -46,8 +36,19 @@ function initDeploymentList(){
 	$deploymentlistdt = $deploymentlist.DataTable();
 	$('#deploymentlist tbody').on('dblclick', 'tr', function(){
 		var rowData = $deploymentlistdt.row(this).data();
-		loadUpdateProj(rowData.projNo);
+		openReqInfo(rowData.reqNo.substring(2), rowData.projNoName.substring(0,6),"deployment");
 	});
 }
+
+/*function openReqInfo2(reqNo, projNo){
+	loadProjInfo(null, projNo, 'openReqInfo');
+	loadProjAdtlInfo('projinfo-div', projNo);
+	loadReqInfo('projadtlinfo-div', reqNo);
+	makeFieldsUneditable(); //SHA
+	$('#projcost-col').remove();
+	$("#additionalInformation-div").remove();
+	loadReqStatusMain('reqinfo-div', reqNo);
+	$back.removeClass('hide');
+}*/
 
 

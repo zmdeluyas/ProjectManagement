@@ -1,12 +1,11 @@
 <table id="deploymentlist" class="table table-hover common-table table-sm dt-responsive nowrap" style="width: 100%">
 	<thead class="tblHead">
 		<tr>
-			<th>Project No.</th>
-			<th>Project Name</th>
-			<th>Business Unit</th>
-			<th>Description</th>
+			<th>Request No.</th>
+			<th>Request Summary</th>
+			<th>Project No. - Project Name</th>
+			<th>Date Submitted</th>
 			<th>Status</th>
-			<th>Project Health</th>
 		</tr>
 	</thead>
 </table>

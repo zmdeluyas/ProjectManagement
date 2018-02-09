@@ -179,8 +179,8 @@ function loadAddProj(){
 function loadUpdateProj(projNo){
 	loadProjInfo(null, projNo, 'updateProj');
 	loadProjAdtlInfo('projinfo-div', projNo);
-	makeFieldsUneditable();
 	if(useraccess == 'bu'){
+		makeFieldsUneditable();
 		$('#projInfra').remove();
 		$('#projcost-col').removeClass("col-xs-6");
 		$('#projcost-col').addClass("col-xs-12");
@@ -188,7 +188,6 @@ function loadUpdateProj(projNo){
 		//$('#grpbtnApproval').removeClass('hide');
 		//$('#projSaveBtn').addClass('hide');
 	}
-	
 	if(current_dashboard == 'deployment'){
 		makeFieldsUneditable();
 		$('#projcost-col').remove();
@@ -298,7 +297,6 @@ function insertProj(){
 				projInfra: JSON.stringify(projInfra),
 				projCost: JSON.stringify(projCost)
 			},
-			async: false,
 			success : function(result) {
 				$('#projNo').val(padLeft(result, 6));
 				$('#saveProjNo').html('Project No. ' + padLeft(result, 6) + '  successfully saved!');
@@ -497,7 +495,6 @@ function submitProject(){
 			url : contextPath + "/project/submit",
 			method : "POST",
 			data : prepareProjInfo(),
-			async: false,
 			success : function(result) {
 				if(result == 'success'){
 					loadProjStatusMain('projadtlinfo-div', projInfo.projNo);
@@ -528,7 +525,6 @@ function approveProject(){
 			method : "POST",
 			//data : prepareApprvReqProjInfo(),
 			data : projInfo,
-			async: false,
 			success : function(result) {
 				if(result == 'success'){
 					disableProjSave(true);
@@ -583,7 +579,6 @@ function loadProjStatusMain(afterDiv, projNo){
 		$.ajax({
 			url : contextPath + "/project/statusmain?projNo="+projNo,
 			method : "GET",
-			async: false,
 			success : function(result) {
 				if(afterDiv != null){
 					$($afterdiv).after(result);
@@ -776,7 +771,6 @@ function updateProjHist(psNoDone, psNoStart, psNoStartLastTag){
 	        data: {
 	        	param: JSON.stringify(obj)
 	        },
-	        async: false,
 			success : function(result) {
 				projHist = result;
 			},
@@ -789,34 +783,27 @@ function updateProjHist(psNoDone, psNoStart, psNoStartLastTag){
 function makeFieldsUneditable() {
 	//project info fields
 	$('#projName').prop('readonly', true);
-	$('#seachProjManager').removeClass('hide');
-	$('#seachbusUnit').removeClass('hide');
-	$('#seachStatus').removeClass('hide');
-	//$('#bussinessUnit').removeClass('common-editable-fields');
+	$('#bussinessUnit').removeClass('common-editable-fields');
 	$('#bussinessUnit').prop('readonly', true);
 	$('#projDesc').attr('readonly', true);
-	//$('#projManager').removeClass('common-editable-fields');
+	$('#projManager').removeClass('common-editable-fields');
 	$('#projManager').attr('readonly', true);
-	//$('#projStatus').removeClass('common-editable-fields');
+	$('#projStatus').removeClass('common-editable-fields');
 	$('#projStatus').attr('readonly', true);
 	//
 	
-	if (projApproved == 1 && req_type == 1) {
+	if (projApproved == 1) {
 		$('#projPSD').prop('readonly', true);
 		$('#projPFD').prop('readonly', true);
 		$('#projASD').prop('readonly', true);
 		$('#projACD').prop('readonly', true);
-		$('#seachProjRegion').addClass("hide");
+		$('#seachProjRegion').prop('disabled', true);
 		$('#projRegion').removeClass('common-editable-fields');
 		$('#projPhase').attr('disabled', 'disabled');
 		$('#projTotBudget').prop('readonly', true);
 		$('#reqDesc').prop('readonly', true);
-		//$("#projadtlinfo-div span").prop('disabled', true);
-		//$("#projinfo-div span").prop('disabled', true);
-		$("#projinfo-div span").addClass('hide');
-		//$("#reqinfo-div span").prop('disabled', true);
-		$("#seachDeveloper,#searchBA,#searchQA,#searchOPs").addClass("hide");
-		$("#projInfra span").addClass("hide");
+		$("#projadtlinfo-div span").prop('disabled', true);
+		$("#reqinfo-div span").prop('disabled', true);
 		// project infrastructure fields
 		$('#projOS').removeClass('common-editable-fields');
 		$('#projMW').removeClass('common-editable-fields');
@@ -828,12 +815,8 @@ function makeFieldsUneditable() {
 		$('#projMemory').prop('disabled', true);
 	} else {
 		if (useraccess == "bu") {
-			//$("#projadtlinfo-div span").prop('disabled', true);
-			$('#seachProjRegion').addClass("hide");
-//			$("#reqinfo-div span").prop('disabled', true);
-			$("#seachDeveloper,#searchBA,#searchQA,#searchOPs").addClass("hide");
-			$("#projInfra span").addClass("hide");
-			//$("#projinfo-div span").addClass('hide');
+			$("#projadtlinfo-div span").prop('disabled', true);
+			$("#reqinfo-div span").prop('disabled', true);
 			// project infrastructure fields
 			$('#projOS').removeClass('common-editable-fields');
 			$('#projMW').removeClass('common-editable-fields');
@@ -875,7 +858,6 @@ function createVM(){
 			repoParam: JSON.stringify(repParam),
 			reqNo: $('#reqNo').val()
 		},
-		async: false,
 		success: function(response){
 			if(response == "success"){
 				console.log("creating repository....");
