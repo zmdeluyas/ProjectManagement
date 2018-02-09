@@ -68,10 +68,10 @@ function loadReqInfo(afterDiv, reqNo, reqType) {
 							} else if (useraccess == 'bu' && nvl($('#ravBy').val(), '') == '') {
 								setFieldsToEditable();
 								updateBtnFunction();
-							} else if (useraccess == 'ba' && nvl($('#ravBy').val(), '') == '') {
+							} /*else if (useraccess == 'ba' && nvl($('#ravBy').val(), '') == '') {
 								setFieldsToEditable();
 								updateBtnFunction();
-							}
+							}*/
 						}
 						if (reqType == 'createProjReq') {
 							$('#reqinfo-div').hide();
