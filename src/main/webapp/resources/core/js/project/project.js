@@ -789,12 +789,15 @@ function updateProjHist(psNoDone, psNoStart, psNoStartLastTag){
 function makeFieldsUneditable() {
 	//project info fields
 	$('#projName').prop('readonly', true);
-	$('#bussinessUnit').removeClass('common-editable-fields');
+	$('#seachProjManager').removeClass('hide');
+	$('#seachbusUnit').removeClass('hide');
+	$('#seachStatus').removeClass('hide');
+	//$('#bussinessUnit').removeClass('common-editable-fields');
 	$('#bussinessUnit').prop('readonly', true);
 	$('#projDesc').attr('readonly', true);
-	$('#projManager').removeClass('common-editable-fields');
+	//$('#projManager').removeClass('common-editable-fields');
 	$('#projManager').attr('readonly', true);
-	$('#projStatus').removeClass('common-editable-fields');
+	//$('#projStatus').removeClass('common-editable-fields');
 	$('#projStatus').attr('readonly', true);
 	//
 	
@@ -830,7 +833,7 @@ function makeFieldsUneditable() {
 //			$("#reqinfo-div span").prop('disabled', true);
 			$("#seachDeveloper,#searchBA,#searchQA,#searchOPs").addClass("hide");
 			$("#projInfra span").addClass("hide");
-			$("#projinfo-div span").addClass('hide');
+			//$("#projinfo-div span").addClass('hide');
 			// project infrastructure fields
 			$('#projOS').removeClass('common-editable-fields');
 			$('#projMW').removeClass('common-editable-fields');

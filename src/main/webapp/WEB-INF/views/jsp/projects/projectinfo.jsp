@@ -83,7 +83,7 @@
 	<jsp:include page="popup/businessUPopup.jsp"></jsp:include>
 	<jsp:include page="popup/projStatusPopup.jsp"></jsp:include>
 </c:if>
-<c:if test="${(projNo == null && 'addProj' == page) || (projNo != null && 'updateProj' == page)}">
+<c:if test="${(projNo == null && 'addProj' == page) || (projNo != null && 'updateProj' == page) || (projNo != null && 'openReqInfo' == page)}">
 	<jsp:include page="popup/projHealthPopup.jsp"></jsp:include>
 	<jsp:include page="popup/projManagerPopup.jsp"></jsp:include>
 	<jsp:include page="popup/businessUPopup.jsp"></jsp:include>
