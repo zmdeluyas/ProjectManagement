@@ -67,7 +67,8 @@ function initProjectList(){
 	$projectlistdt = $projectlist.DataTable();
 	$('#projectlist tbody').on('dblclick', 'tr', function(){
 		var rowData = $projectlistdt.row(this).data();
-		loadUpdateProj(rowData.projNo);
+		alert(1);
+		//loadUpdateProj(rowData.projNo);
 	});
 }
 
@@ -213,7 +214,7 @@ function projPopupActions(projNo){
 	if(useraccess != "pm"){
 		$('#projCostStatus').remove();
 	}
-	
+	$('#deployment-col').remove();
 	$('#seachProj').hide();
 	$('#seachProjManager').removeClass('hide');
 	$('#seachbusUnit').removeClass('hide');
