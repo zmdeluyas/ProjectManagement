@@ -48,17 +48,8 @@ function initRequestList(){
 	});
 }
 
-//NEW -Ronnie
-function openReqInfo(reqNo, projNo){
-	loadProjInfo(null, projNo, 'openReqInfo');
-	loadProjAdtlInfo('projinfo-div', projNo);
-	loadReqInfo('projadtlinfo-div', reqNo);
-	makeFieldsUneditable(); //SHA
-	$('#deployment-col').remove();
-	$("#additionalInformation-div").remove();
-	loadReqStatusMain('reqinfo-div', reqNo);
-	$back.removeClass('hide');
-}
+
+
 
 //ARVIC
 var $devpopuptb;
@@ -81,7 +72,6 @@ var qaUserId;
 var $qapopuptb;
 var qaManagerPopUp = [];
 var popUpQAModal;
-/* ARVIC - END */
 
 /* added by SHARIE MANIPON 11.20.2017 */
 var $oppopuptb;
@@ -91,7 +81,6 @@ var opEmail;
 var opUserId;
 var popUpOPModal;
 
-/* ARVIC */
 function initDevPopUpVariable(){
 	$devpopuptb = "developerPopupTb";
  	popUpDevModal = 'requestDevPopupModal';
@@ -115,7 +104,6 @@ function initBAPopUpVariable(){
  	baEmail = "assignedBAEmail";
  	baUserId = "assignedBAId";
 }
-/* END - ARVIC */
 
 /*added by SHARIE MANIPON 11.20.2017*/
 function initOPPopUpVariable(){

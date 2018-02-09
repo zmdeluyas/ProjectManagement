@@ -14,9 +14,11 @@ function createRequest(){
 }
 
 function createProjRequest(){
+	console.log('funtion here');
 	loadReqInfo(null, null, 'createProjReq');
 	loadProjInfo('reqinfo-div', null, 'addProj');
 	loadProjAdtlInfo('projinfo-div');
+	$('#deployment-col').remove();
 	setFieldsToEditable();
 	$back.removeClass('hide');
 	userPreviliges();
@@ -68,10 +70,10 @@ function loadReqInfo(afterDiv, reqNo, reqType) {
 							} else if (useraccess == 'bu' && nvl($('#ravBy').val(), '') == '') {
 								setFieldsToEditable();
 								updateBtnFunction();
-							} /*else if (useraccess == 'ba' && nvl($('#ravBy').val(), '') == '') {
+							} else if (useraccess == 'ba' && nvl($('#ravBy').val(), '') == '') {
 								setFieldsToEditable();
 								updateBtnFunction();
-							}*/
+							}
 						}
 						if (reqType == 'createProjReq') {
 							$('#reqinfo-div').hide();
@@ -276,7 +278,6 @@ function insertRequest(){
 			url : contextPath + "/request/save",
 			method : "POST",
 			data : prepareRequestInfo(),
-			async: false,
 			success : function(result) {
 				if(result.status == 'SUCCESS'){
 					$('#reqNo').val(padLeft(result.reqNo, 8));
@@ -303,7 +304,6 @@ function insertProjRequest(){
 			url : contextPath + "/request/saveproj",
 			method : "POST",
 			data : prepareProjRequestInfo(),
-			async: false,
 			success : function(result) {
 //				if(result.status == 'SUCCESS'){
 //					$('#reqNo').val(padLeft(result.reqNo, 8));
@@ -330,7 +330,6 @@ function approveRequest(){
 			url : contextPath + "/request/approve",
 			method : "POST",
 			data : prepareRequestInfo(),
-			async: false,
 			success : function(result) {
 				//if (checkErrorOnResponse(result)) {
 				if(result == 'success'){
@@ -343,10 +342,10 @@ function approveRequest(){
 					disableReqSave(true);
 					setTimeout(function(){
 						changeReqStatus(2);
-					},2000)
+					},3000)
 					setTimeout(function(){ //SHA
 						reqStatusTimer();
-					}, 3000);
+					}, 5000);
 				}
 				//}
 			},
@@ -440,7 +439,6 @@ function loadReqStatusMain(afterDiv, reqNo){
 		$.ajax({
 			url : contextPath + "/request/statusmain?reqNo="+reqNo,
 			method : "GET",
-			async: false,
 			success : function(result) {
 				//if (checkErrorOnResponse(result)) {
 				if(afterDiv != null){
@@ -667,7 +665,6 @@ function getUpdatedReqHist(){
 	        data: {
 	        	reqNo : parseInt($('#reqNo').val())
 	        },
-	        async: false,
 			success : function(result) {
 				reqUpdatedHist = result;
 			},
@@ -708,7 +705,6 @@ function updateReqHist(rsNoDone, rsNoStart, rsNoStartLastTag){
 	        data: {
 	        	param: JSON.stringify(obj)
 	        },
-	        async: false,
 			success : function(result) {
 				reqHist = result;
 			},
@@ -725,4 +721,20 @@ function getRSTimerSec(rsNo){
 			return obj[x].sec;
 		}
 	}
+}
+
+//NEW -Ronnie
+function openReqInfo(reqNo, projNo, type){
+	loadProjInfo(null, projNo, 'openReqInfo');
+	loadProjAdtlInfo('projinfo-div', projNo);
+	loadReqInfo('projadtlinfo-div', reqNo);
+	makeFieldsUneditable(); //SHA
+	if(type == "deployment"){
+		$('#projcost-col').remove();
+	}else{
+		$('#deployment-col').remove();
+	}
+	$("#additionalInformation-div").remove();
+	loadReqStatusMain('reqinfo-div', reqNo);
+	$back.removeClass('hide');
 }
