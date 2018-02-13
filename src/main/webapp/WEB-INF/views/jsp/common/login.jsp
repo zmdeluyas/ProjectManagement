@@ -5,13 +5,13 @@
 			<div class="col-xs-2"></div>
 			<div class="col-xs-8">
 				<div class="input-group">
-					<span class="input-group-addon">
+					<span class="input-group-addon" style="background-color: aliceblue">
 						<span class="glyphicon glyphicon-user"></span>
 					</span>
 					<input id="username" type="text" class="form-control" placeholder="Username">
 				</div>
 				<div class="input-group top10">
-					<span class="input-group-addon">
+					<span class="input-group-addon" style="background-color: aliceblue">
 						<span class="glyphicon glyphicon-asterisk"></span>
 					</span>
 					<input id="password" type="password" class="form-control" placeholder="Password">
