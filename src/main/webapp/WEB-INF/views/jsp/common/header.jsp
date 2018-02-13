@@ -1,17 +1,17 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <spring:url value="/resources/core/css/images/myAvatar.png" var="myAvatar" />
-<nav class="navbar navbar-default navbar-static-top main">
+<nav class="navbar navbar-default navbar-static-top main header">
     <!-- <div class="container"> -->
       <div class="navbar-header">
-        <a id="logo" class="navbar-brand" href="#">
+        <a id="logo" class="navbar-brand" href="#" style="color: white">
         	TRUE-CI
         </a>
       </div>
-      <div id="mainnavbar" class="navbar-collapse collapse">
+      <div id="mainnavbar" class="navbar-collapse collapse header white">
         <ul class="nav navbar-nav navbar-left">
           <li class="dropdown">
             <a id="header-menu" href="#" class="dropdown-toggle hide" data-toggle="dropdown" role="button" aria-expanded="false">
-            	<span class="glyphicon glyphicon-menu-hamburger"></span>
+            	<span class="glyphicon glyphicon-menu-hamburger white"></span>
             </a>
             <ul class="dropdown-menu" role="menu">
               <li><a id="home" href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>

@@ -13,6 +13,7 @@
 <spring:url value="/resources/core/css/thirdparty/buttons.bootstrap.min.css" var="buttonsbootstrapCss" />
 <spring:url value="/resources/core/css/thirdparty/bootstrap-datetimepicker.min.css" var="bootstrapdatetimepickerCss" />
 <spring:url value="/resources/core/css/common.css" var="commonCss" />
+<spring:url value="/resources/core/css/images/back.png" var="bodyBackground" />
 <link href="${bootstrapCss}" rel="stylesheet" />
 <link href="${bootstrapThemeCss}" rel="stylesheet" />
 <link href="${dataTablesbootstrapCss}" rel="stylesheet" />
@@ -67,7 +68,7 @@
 <script src="${attachmentjs}"></script>
 <script src="${deploymentlistjs}"></script>
 </head>
-<body>
+<body class="backgroundImage">
 <div id="main-header">
 	<jsp:include page="common/header.jsp"></jsp:include>
 </div>
