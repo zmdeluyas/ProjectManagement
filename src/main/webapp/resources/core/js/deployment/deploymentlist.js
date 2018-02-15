@@ -51,4 +51,24 @@ function initDeploymentList(){
 	$back.removeClass('hide');
 }*/
 
+function initDeploymentButtons(){
+	if (useraccess == "op"){
+		$("#btnDeploy").removeAttr("disabled");
+		$("#btnDeploy").removeClass("hide");
+		$("#reqSaveBtn").addClass("hide");
+	}
+	
+//	$("#btnDeploy").click(function(){
+//		$.ajax({
+//			url: contextPath + "/deployments/save",
+//			method: "POST",
+//			data : { },
+//			async: false,
+//			success: function(){
+//				
+//			}
+//		});
+		
+//	});
+}
 

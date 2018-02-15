@@ -1,5 +1,5 @@
 <div class="container" id="reqstatusmain-div">
-	<div class="panel panel-primary">
+	<div class="panel panel-primary bodyBackground">
 		<div class="panel-heading">Request Status</div>
 		<div class="panel-body">
 			<div class="container-fluid" id="req-status-body">

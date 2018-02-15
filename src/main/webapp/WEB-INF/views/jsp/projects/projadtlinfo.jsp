@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="container" id="projadtlinfo-div">
-	<div class="panel panel-primary box">
+	<div class="panel panel-primary box bodyBackground">
 		<div class="panel-heading box">Project Period</div>
 		<div class="panel-body" id="proj-period">
 			<div class="container-fluid">
@@ -80,10 +80,10 @@
 	</div>
 	<div class="row">
 		<div class="col-xs-6" id="projInfra">
-			<div class="panel panel-primary box">
+			<div class="panel panel-primary box bodyBackground">
 				<div class="panel-heading box">Infrastructure</div>
 				<div class="panel-body">
-					<div class= "container-fluid" >
+					<div class="container-fluid">
 						<div class="row top10">
 							<div class="col-xs-1"></div>
 							<div class="col-xs-10">
@@ -169,72 +169,83 @@
 			</div>
 		</div>
 		<div class="col-xs-6" id="projcost-col">
-			<div class="panel panel-primary box">
+			<div class="panel panel-primary box bodyBackground">
 				<div class="panel-heading box">Project Cost</div>
 				<div class="panel-body">
 					<div class="container-fluid">
 						<div class="row top30">
 							<div class="col-xs-1"></div>
-							<div class="col-xs-10">
+							<div class="col-xs-12">
 								<label for="projTotBudget" class="common-label">Total
 									Budget</label> <input id="projTotBudget" type="text"
 									class="form-control common-input currency" value="0.00">
 							</div>
 						</div>
-						
+
 						<!-- Added By: Bryan Balino 11/17/2017 -->
 						<div class="row top17" id="projCostStatus">
 							<div class="col-xs-1"></div>
 							<div class="col-xs-10">
-								<label class="common-label">Status</label> 
-								<label class="common-label"><input id="rBtnApproved" type="radio" name="optradio" value="1">Approved</label>
-								<label class="common-label"><input id="rBtnDisApproved" type="radio" name="optradio" value="0">Disapproved</label>
+								<label class="common-label">Status</label> <label
+									class="common-label"><input id="rBtnApproved"
+									type="radio" name="optradio" value="1">Approved</label> <label
+									class="common-label"><input id="rBtnDisApproved"
+									type="radio" name="optradio" value="0">Disapproved</label>
 							</div>
 						</div>
-						
-						<!-- Removed By: Bryan Balino 11/17/2017 -->
-						<!-- <div class="row top17">
-							<div class="col-xs-1"></div>
-							<div class="col-xs-10">
-								<label for="projBudToDate" class="top5 common-label">Budget
-									to Date</label> <input id="projBudToDate" type="text"
-									class="form-control common-input currency" value="0.00">
-							</div>
-						</div>
-						<div class="row top17">
-							<div class="col-xs-1"></div>
-							<div class="col-xs-10">
-								<label for="projActToDate" class="top5 common-label">Actual
-									to Date</label> <input id="projActToDate" type="text"
-									class="form-control common-input currency" value="0.00">
-							</div>
-						</div> -->
-						
-						<div class="row top17">
-							<!-- <div class="col-xs-12" style="text-align:center;">
-								<button id="projCostDtls" type="button" class="btn btn-default">Cost Details</button>
-							</div> -->
-						</div>
-						
-						<div class="row top17"></div>
 					</div>
+					<div class="row top17"></div>
 				</div>
 			</div>
 		</div>
 		<div class="col-xs-6" id="deployment-col">
-			<div class="panel panel-primary box">
+			<div class="panel panel-primary box bodyBackground">
 				<div class="panel-heading box">Deployment</div>
 				<div class="panel-body">
 					<div class="container-fluid">
-						<div class="row top163"></div>
+						<div class="row top10">
+							<div class="col-xs-12">
+								<label for="projOS" class="top5 common-label"
+									style="width: 26% !important;">Host Address</label> <input
+									id="txtHostAddress" type="text"
+									class="form-control common-input common-editable-fields"
+									placeholder="Ex: 192.168.56.33" />
+							</div>
+						</div>
+						<div class="row top10">
+							<div class="col-xs-12">
+								<label for="projOS" class="top5 common-label"
+									style="width: 26% !important;">Host Port</label> <input
+									id="txtHostPort" type="text"
+									class="form-control common-input common-editable-fields"
+									placeholder="Ex: 8080" />
+							</div>
+						</div>
+						<div class="row top10">
+							<div class="col-xs-12">
+								<label for="projOS" class="top5 common-label"
+									style="width: 26% !important;">WebServer Username</label> <input
+									id="txtWsUsername" type="text"
+									class="form-control common-input common-editable-fields"
+									placeholder="username" />
+							</div>
+						</div>
+						<div class="row top10">
+							<div class="col-xs-12">
+								<label for="projOS" class="top5 common-label"
+									style="width: 26% !important;">WebServer Password</label> <input
+									id="txtWsPassword" type="text"
+									class="form-control common-input common-editable-fields"
+									placeholder="password" />
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<div id="additionalInformation-div">
-		<div class="panel panel-primary box">
+		<div class="panel panel-primary box bodyBackground">
 			<div class="panel-heading box">Additional Information</div>
 			<div class="panel-body">
 				<div class="container-fluid">
@@ -251,8 +262,8 @@
 						<div class="col-xs-5">
 							<label class="top5 common-label">Attach File/s:</label> <a
 								href="#uploadModal" class="btn btn-info" id="uploadBtn"
-								data-toggle="modal" data-target="#uploadModal"><span 
-								class="glyphicon glyphicon-paperclip"></span></a> 
+								data-toggle="modal" data-target="#uploadModal"><span
+								class="glyphicon glyphicon-paperclip"></span></a>
 						</div>
 					</div>
 				</div>
