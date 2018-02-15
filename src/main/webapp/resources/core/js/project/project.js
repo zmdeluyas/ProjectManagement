@@ -24,6 +24,7 @@ function loadProjInfo(afterDiv, projNo, page){
 					$('#projNo').removeClass('pad-right-25');
 					$('#seachProj').hide();
 				}else if(projNo == null && 'addProj' == page){
+					projApproved = 0;
 					initAddProjInfo();
 				}else if(projNo != null && 'updateProj' == page){
 					populateProjInfo(getProjInfByNo(projNo));
@@ -179,8 +180,9 @@ function loadAddProj(){
 function loadUpdateProj(projNo){
 	loadProjInfo(null, projNo, 'updateProj');
 	loadProjAdtlInfo('projinfo-div', projNo);
+	makeFieldsUneditable('updateProj');
 	if(useraccess == 'bu'){
-		makeFieldsUneditable();
+		//makeFieldsUneditable();
 		$('#projInfra').remove();
 		$('#projcost-col').removeClass("col-xs-6");
 		$('#projcost-col').addClass("col-xs-12");
@@ -189,7 +191,7 @@ function loadUpdateProj(projNo){
 		//$('#projSaveBtn').addClass('hide');
 	}
 	if(current_dashboard == 'deployment'){
-		makeFieldsUneditable();
+		//makeFieldsUneditable();
 		$('#projcost-col').remove();
 		//$('#grpbtnApproval').removeClass('hide');
 		//$('#projSaveBtn').addClass('hide');
@@ -201,20 +203,23 @@ function loadUpdateProj(projNo){
 
 function initAddProjInfo(){
 	var link = '<a id="editProjHealth" class="margin-left-3" data-toggle="modal" data-target="#projHealthPopupModal" style="cursor: pointer; cursor: hand;">Edit</a>';
-	$('#projNo').removeClass('pad-right-25');
-	$('#seachProj').hide();
-	$('#projInfoHealth').addClass('health-g margin-left-3').removeClass('margin-left-15').after(link);
-	$('#projMoreInfoBtn').hide();
-	$('#createdBy').css('width', '');
-	$('#projName').removeAttr('readonly');
-	$('#projManager').addClass('pad-right-25');
-	$('#bussinessUnit').addClass('pad-right-25');
-	$('#projStatus').addClass('pad-right-25');
-	$('#projDesc').removeAttr('readonly').addClass('pad-right-25');
-	$('#seachProjManager').removeClass('hide');
-	$('#seachbusUnit').removeClass('hide');
-	$('#seachStatus').removeClass('hide');
-	$('#projDescEditor').removeClass('hide');
+	if (projApproved != 1) {
+		$('#projNo').removeClass('pad-right-25');
+		$('#seachProj').hide();
+		$('#projInfoHealth').addClass('health-g margin-left-3').removeClass('margin-left-15').after(link);
+		$('#projMoreInfoBtn').hide();
+		$('#createdBy').css('width', '');
+		$('#projName').removeAttr('readonly');
+		$('#projManager').addClass('pad-right-25');
+		$('#bussinessUnit').addClass('pad-right-25');
+		$('#projStatus').addClass('pad-right-25');
+		$('#projDesc').removeAttr('readonly').addClass('pad-right-25');
+		$('#seachProjManager').removeClass('hide');
+		$('#seachbusUnit').removeClass('hide');
+		$('#seachStatus').removeClass('hide');
+		$('#projDescEditor').removeClass('hide');
+	}
+	
 }
 
 function loadProjAdtlInfo(afterDiv, projNo){
@@ -780,54 +785,88 @@ function updateProjHist(psNoDone, psNoStart, psNoStartLastTag){
 	}
 }
 
-function makeFieldsUneditable() {
+function makeFieldsUneditable(action) {
 	//project info fields
 	$('#projName').prop('readonly', true);
-	$('#seachProjManager').removeClass('hide');
-	$('#seachbusUnit').removeClass('hide');
-	$('#seachStatus').removeClass('hide');
-	//$('#bussinessUnit').removeClass('common-editable-fields');
 	$('#bussinessUnit').prop('readonly', true);
 	$('#projDesc').attr('readonly', true);
-	//$('#projManager').removeClass('common-editable-fields');
 	$('#projManager').attr('readonly', true);
-	//$('#projStatus').removeClass('common-editable-fields');
 	$('#projStatus').attr('readonly', true);
 	//
 	
-	if (projApproved == 1 && req_type == 1) {
-		$('#projPSD').prop('readonly', true);
-		$('#projPFD').prop('readonly', true);
-		$('#projASD').prop('readonly', true);
-		$('#projACD').prop('readonly', true);
-		$('#seachProjRegion').addClass("hide");
-		$('#projRegion').removeClass('common-editable-fields');
-		$('#projPhase').attr('disabled', 'disabled');
-		$('#projTotBudget').prop('readonly', true);
-		$('#reqDesc').prop('readonly', true);
-		//$("#projadtlinfo-div span").prop('disabled', true);
-		//$("#projinfo-div span").prop('disabled', true);
-		$("#projinfo-div span").addClass('hide');
-		//$("#reqinfo-div span").prop('disabled', true);
-		$("#seachDeveloper,#searchBA,#searchQA,#searchOPs").addClass("hide");
-		$("#projInfra span").addClass("hide");
-		// project infrastructure fields
-		$('#projOS').removeClass('common-editable-fields');
-		$('#projMW').removeClass('common-editable-fields');
-		$('#projApp').removeClass('common-editable-fields');
-		$('#projOS').prop('readonly', true);
-		$('#projMW').prop('readonly', true);
-		$('#projApp').prop('readonly', true);
-		$('#projCPU').prop('disabled', true);
-		$('#projMemory').prop('disabled', true);
-	} else {
-		if (useraccess == "bu") {
-			//$("#projadtlinfo-div span").prop('disabled', true);
+	if (action == 'openReqInfo') {
+		if (projApproved == 1 && req_type == 1) {
+			$('#projPSD').prop('readonly', true);
+			$('#projPFD').prop('readonly', true);
+			$('#projASD').prop('readonly', true);
+			$('#projACD').prop('readonly', true);
 			$('#seachProjRegion').addClass("hide");
-//			$("#reqinfo-div span").prop('disabled', true);
+			$('#projRegion').removeClass('common-editable-fields');
+			$('#projPhase').attr('disabled', 'disabled');
+			$('#projTotBudget').prop('readonly', true);
+			$('#reqDesc').prop('readonly', true);
+			$('#bussinessUnit').removeClass('common-editable-fields');
+			$('#projManager').removeClass('common-editable-fields');
+			$('#projStatus').removeClass('common-editable-fields');
+			$("#projinfo-div span").addClass('hide');
+			$("#seachDeveloper,#searchBA,#searchQA,#searchOPs").addClass("hide");
+			// project infrastructure fields
+			$("#projInfra span").addClass("hide");
+			$('#projOS').removeClass('common-editable-fields');
+			$('#projMW').removeClass('common-editable-fields');
+			$('#projApp').removeClass('common-editable-fields');
+			$('#projOS').prop('readonly', true);
+			$('#projMW').prop('readonly', true);
+			$('#projApp').prop('readonly', true);
+			$('#projCPU').prop('disabled', true);
+			$('#projMemory').prop('disabled', true);
+		} else {
+			if (useraccess == "bu") {
+				$('#seachProjRegion').addClass("hide");
+				$("#seachDeveloper,#searchBA,#searchQA,#searchOPs").addClass("hide");
+				$("#projInfra span").addClass("hide");
+				// project infrastructure fields
+				$('#projOS').removeClass('common-editable-fields');
+				$('#projMW').removeClass('common-editable-fields');
+				$('#projApp').removeClass('common-editable-fields');
+				$('#bussinessUnit').removeClass('common-editable-fields');
+				$('#projManager').removeClass('common-editable-fields');
+				$('#projStatus').removeClass('common-editable-fields');
+				$('#projOS').prop('readonly', true);
+				$('#projMW').prop('readonly', true);
+				$('#projApp').prop('readonly', true);
+				$('#projCPU').prop('disabled', true);
+				$('#projMemory').prop('disabled', true);
+				//
+			}
+			
+			$('#projPSD').prop('readonly', false);
+			$('#projPFD').prop('readonly', false);
+			$('#projASD').prop('readonly', false);
+			$('#projACD').prop('readonly', false);
+			$('#projRegion').addClass('common-editable-fields');
+			$('#projPhase').attr('disabled', false);
+			$('#projTotBudget').prop('readonly', false);
+			$('#reqDesc').prop('readonly', false);
+		}
+	} else if(action == 'updateProj') {
+		if (projApproved == 1) {
+			$('#projPSD').prop('readonly', true);
+			$('#projPFD').prop('readonly', true);
+			$('#projASD').prop('readonly', true);
+			$('#projACD').prop('readonly', true);
+			$('#seachProjRegion').addClass("hide");
+			$('#projRegion').removeClass('common-editable-fields');
+			$('#projPhase').attr('disabled', 'disabled');
+			$('#projTotBudget').prop('readonly', true);
+			$('#reqDesc').prop('readonly', true);
+			$('#bussinessUnit').removeClass('common-editable-fields');
+			$('#projManager').removeClass('common-editable-fields');
+			$('#projStatus').removeClass('common-editable-fields');
+			$("#projinfo-div span").addClass('hide');
 			$("#seachDeveloper,#searchBA,#searchQA,#searchOPs").addClass("hide");
 			$("#projInfra span").addClass("hide");
-			//$("#projinfo-div span").addClass('hide');
+			
 			// project infrastructure fields
 			$('#projOS').removeClass('common-editable-fields');
 			$('#projMW').removeClass('common-editable-fields');
@@ -837,24 +876,19 @@ function makeFieldsUneditable() {
 			$('#projApp').prop('readonly', true);
 			$('#projCPU').prop('disabled', true);
 			$('#projMemory').prop('disabled', true);
-			//
 		}
-		
-		$('#projPSD').prop('readonly', false);
-		$('#projPFD').prop('readonly', false);
-		$('#projASD').prop('readonly', false);
-		$('#projACD').prop('readonly', false);
-		$('#projRegion').addClass('common-editable-fields');
-		$('#projPhase').attr('disabled', false);
-		$('#projTotBudget').prop('readonly', false);
-		$('#reqDesc').prop('readonly', false);
+	} else {
+		$('#bussinessUnit').removeClass('common-editable-fields');
+		$('#projManager').removeClass('common-editable-fields');
+		$('#projStatus').removeClass('common-editable-fields');
 	}
+	
 	
 	// project cost fields
 	$('#projBudToDate').prop('readonly', true);
 	$('#projActToDate').prop('readonly', true);
 	$('#projCostDtls').prop('disable', true);
-	
+	//
 	$('#projRemarks').prop('readonly', true);	
 }
 

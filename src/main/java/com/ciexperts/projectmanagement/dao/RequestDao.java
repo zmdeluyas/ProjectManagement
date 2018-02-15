@@ -10,8 +10,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-
-import com.ciexperts.projectmanagement.entity.Project;
 import com.ciexperts.projectmanagement.entity.Request;
 import com.ciexperts.projectmanagement.entity.RequestHistory;
 import com.ciexperts.projectmanagement.entity.RequestStatus;

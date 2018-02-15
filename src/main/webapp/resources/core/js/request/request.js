@@ -5,7 +5,10 @@ var reqUpdatedHist;
 var reqHist = [];
 
 function createRequest(){
+	projApproved = undefined;
+	req_type = undefined;
 	loadProjInfo(null, null, 'createReq');
+	makeFieldsUneditable('createReq');
 	/*loadProjPlanPeriod('projinfo-div');
 	loadReqInfo('proj-plan-infra');*/
 	//loadReqInfo('projadtlinfo-div'); /* added by SHARIE MANIPON 11.21.2017 */
@@ -728,9 +731,10 @@ function openReqInfo(reqNo, projNo, type){
 	loadProjInfo(null, projNo, 'openReqInfo');
 	loadProjAdtlInfo('projinfo-div', projNo);
 	loadReqInfo('projadtlinfo-div', reqNo);
-	makeFieldsUneditable(); //SHA
+	makeFieldsUneditable('openReqInfo'); //SHA
 	if(type == "deployment"){
 		$('#projcost-col').remove();
+		initDeploymentButtons();
 	}else{
 		$('#deployment-col').remove();
 	}
