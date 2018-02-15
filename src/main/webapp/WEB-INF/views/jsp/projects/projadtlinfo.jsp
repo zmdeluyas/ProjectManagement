@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="container" id="projadtlinfo-div">
-	<div class="panel panel-primary box">
+	<div class="panel panel-primary box bodyBackground">
 		<div class="panel-heading box">Project Period</div>
 		<div class="panel-body" id="proj-period">
 			<div class="container-fluid">
@@ -80,7 +80,7 @@
 	</div>
 	<div class="row">
 		<div class="col-xs-6" id="projInfra">
-			<div class="panel panel-primary box">
+			<div class="panel panel-primary box bodyBackground">
 				<div class="panel-heading box">Infrastructure</div>
 				<div class="panel-body">
 					<div class= "container-fluid" >
@@ -169,7 +169,7 @@
 			</div>
 		</div>
 		<div class="col-xs-6" id="projcost-col">
-			<div class="panel panel-primary box">
+			<div class="panel panel-primary box bodyBackground">
 				<div class="panel-heading box">Project Cost</div>
 				<div class="panel-body">
 					<div class="container-fluid">
@@ -222,7 +222,7 @@
 			</div>
 		</div>
 		<div class="col-xs-6" id="deployment-col">
-			<div class="panel panel-primary box">
+			<div class="panel panel-primary box bodyBackground">
 				<div class="panel-heading box">Deployment</div>
 				<div class="panel-body">
 					<div class="container-fluid">
@@ -234,7 +234,7 @@
 	</div>
 
 	<div id="additionalInformation-div">
-		<div class="panel panel-primary box">
+		<div class="panel panel-primary box bodyBackground">
 			<div class="panel-heading box">Additional Information</div>
 			<div class="panel-body">
 				<div class="container-fluid">

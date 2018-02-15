@@ -338,10 +338,10 @@ span.date {
 }
 
 .bodyBackground {
-	background-color: azure;
+	background-color: #e1e8f2;
 }
 
 .backgroundImage {
-	background-image: url('/ProjectManagement/resources/core/css/images/background.jfif');
+	background-image: url('/ProjectManagement/resources/core/css/images/images.jfif');
 	background-size: 100%;
 }
