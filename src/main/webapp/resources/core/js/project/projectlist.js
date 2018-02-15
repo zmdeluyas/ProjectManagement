@@ -67,8 +67,7 @@ function initProjectList(){
 	$projectlistdt = $projectlist.DataTable();
 	$('#projectlist tbody').on('dblclick', 'tr', function(){
 		var rowData = $projectlistdt.row(this).data();
-		alert(1);
-		//loadUpdateProj(rowData.projNo);
+		loadUpdateProj(rowData.projNo);
 	});
 }
 
