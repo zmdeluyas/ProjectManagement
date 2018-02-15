@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="container" id="reqinfo-div">
-	<div class="panel panel-primary">
+	<div class="panel panel-primary bodyBackground">
 		<div class="panel-heading">Create Request</div>
 		<div class="panel-body">
 			<div class= "container-fluid">
