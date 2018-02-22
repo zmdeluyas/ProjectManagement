@@ -342,6 +342,7 @@ span.date {
 }
 
 .backgroundImage {
-	background-image: url('/ProjectManagement/resources/core/css/images/backgroundImage.jfif');
-	background-size: 100%;
+	/* background-image: url('/ProjectManagement/resources/core/css/images/backgroundImage.jfif');
+	background-size: 100%; */
+	background-color: #97d7e5;
 }

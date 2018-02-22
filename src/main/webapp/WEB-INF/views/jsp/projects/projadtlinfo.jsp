@@ -200,12 +200,12 @@
 		</div>
 		<div class="col-xs-6" id="deployment-col">
 			<div class="panel panel-primary box bodyBackground">
-				<div class="panel-heading box">Deployment</div>
+				<div class="panel-heading box">Deployment Details</div>
 				<div class="panel-body">
 					<div class="container-fluid">
 						<div class="row top10">
 							<div class="col-xs-12">
-								<label for="projOS" class="top5 common-label"
+								<label for="hostAddress" class="top5 common-label"
 									style="width: 26% !important;">Host Address</label> <input
 									id="txtHostAddress" type="text"
 									class="form-control common-input common-editable-fields"
@@ -213,30 +213,34 @@
 							</div>
 						</div>
 						<div class="row top10">
-							<div class="col-xs-12">
-								<label for="projOS" class="top5 common-label"
-									style="width: 26% !important;">Host Port</label> <input
+							<div class="col-xs-6">
+								<label for="hostPort" class="top5 common-label"
+									style="width: 55.7% !important;">Host Port</label> <input
 									id="txtHostPort" type="text"
 									class="form-control common-input common-editable-fields"
-									placeholder="Ex: 8080" />
+									placeholder="Ex: 8080" style="width: 40%" />
+							</div>
+							<div class="col-xs-6">
+								<label for="contextPath" class="top5 common-label"
+									style="width: 32% !important;">Context Path</label> <input
+									id="txtContextPath" type="text"
+									class="form-control common-input common-editable-fields" style="width: 65%" />
 							</div>
 						</div>
 						<div class="row top10">
 							<div class="col-xs-12">
-								<label for="projOS" class="top5 common-label"
+								<label for="wsUsername" class="top5 common-label"
 									style="width: 26% !important;">WebServer Username</label> <input
 									id="txtWsUsername" type="text"
-									class="form-control common-input common-editable-fields"
-									placeholder="username" />
+									class="form-control common-input common-editable-fields" />
 							</div>
 						</div>
 						<div class="row top10">
 							<div class="col-xs-12">
-								<label for="projOS" class="top5 common-label"
+								<label for="wsPass" class="top5 common-label"
 									style="width: 26% !important;">WebServer Password</label> <input
 									id="txtWsPassword" type="text"
-									class="form-control common-input common-editable-fields"
-									placeholder="password" />
+									class="form-control common-input common-editable-fields" />
 							</div>
 						</div>
 					</div>

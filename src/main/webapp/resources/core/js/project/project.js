@@ -530,6 +530,7 @@ function approveProject(){
 			method : "POST",
 			//data : prepareApprvReqProjInfo(),
 			data : projInfo,
+			async: false,
 			success : function(result) {
 				if(result == 'success'){
 					disableProjSave(true);
@@ -903,6 +904,7 @@ function createVM(){
 			repoParam: JSON.stringify(repParam),
 			reqNo: $('#reqNo').val()
 		},
+		async: false,
 		success: function(response){
 			if(response == "success"){
 				console.log("creating repository....");

@@ -160,8 +160,8 @@ function initReqInfo(){
 			   if($('#projTotBudget').val() == '0') {
 				message = message + "\n\nNote: You have 0.00 balance as your total budget for the project.";
 			}
-			sendEmailReq($('#reqNo').val(), message);
 			approveRequest();
+			sendEmailReq($('#reqNo').val(), message);
 		}   
 		$("#reqUpdateBtn").hide();
 	});
@@ -199,6 +199,7 @@ function sendEmailReq(requestNo, msg){
 					sender    : "trueci.projectmanagement@gmail.com",
 					password  : "projectmanagement12345",
 					reqNo	  : requestNo},
+			async: false,
 			success : function(result) {
 				console.log("E-mail successful!");
 			},
@@ -214,6 +215,7 @@ function updateReq(){
 			url : contextPath + "/request/updateReq",
 			method : "POST",
 			data : prepareRequestInfo(),
+			async: false,
 			success : function(result) {
 				if(result.status == 'SUCCESS'){
 					$('#reqNo').val(padLeft(result.reqNo, 8));
@@ -281,6 +283,7 @@ function insertRequest(){
 			url : contextPath + "/request/save",
 			method : "POST",
 			data : prepareRequestInfo(),
+			async: false,
 			success : function(result) {
 				if(result.status == 'SUCCESS'){
 					$('#reqNo').val(padLeft(result.reqNo, 8));
@@ -307,6 +310,7 @@ function insertProjRequest(){
 			url : contextPath + "/request/saveproj",
 			method : "POST",
 			data : prepareProjRequestInfo(),
+			async:false,
 			success : function(result) {
 //				if(result.status == 'SUCCESS'){
 //					$('#reqNo').val(padLeft(result.reqNo, 8));
@@ -333,6 +337,7 @@ function approveRequest(){
 			url : contextPath + "/request/approve",
 			method : "POST",
 			data : prepareRequestInfo(),
+			async: false,
 			success : function(result) {
 				//if (checkErrorOnResponse(result)) {
 				if(result == 'success'){
@@ -343,12 +348,12 @@ function approveRequest(){
 						if request is on existing project
 					}*/
 					disableReqSave(true);
-					setTimeout(function(){
+					//setTimeout(function(){
 						changeReqStatus(2);
-					},3000)
-					setTimeout(function(){ //SHA
+					//},3000)
+					//setTimeout(function(){ //SHA
 						reqStatusTimer();
-					}, 5000);
+					//}, 5000);
 				}
 				//}
 			},
@@ -442,6 +447,7 @@ function loadReqStatusMain(afterDiv, reqNo){
 		$.ajax({
 			url : contextPath + "/request/statusmain?reqNo="+reqNo,
 			method : "GET",
+			async: false,
 			success : function(result) {
 				//if (checkErrorOnResponse(result)) {
 				if(afterDiv != null){
@@ -639,7 +645,7 @@ function changeReqStatus(currRsNo){
 		}
 	}
 	
-	setTimeout(function(){
+	//setTimeout(function(){
 		if (getReqHistStatus(currRsNo) == "Completed" || getUpdatedReqHistStatus(currRsNo) == "Completed") {
 			$currDiv. find('#status-health').removeClass('health-y').addClass('health-g');
 			$currDiv.find('#status-dtl').html(currRsDesc.replace('reqNo', $('#reqNo').val()).replace('ravBy', $('#ravBy').val()).replace('QA Name', $('#assignedQA').val()));
@@ -657,7 +663,7 @@ function changeReqStatus(currRsNo){
 				return false;
 			}
 		}
-	}, 2000);
+	//}, 2000);
 }
 
 function getUpdatedReqHist(){
@@ -668,6 +674,7 @@ function getUpdatedReqHist(){
 	        data: {
 	        	reqNo : parseInt($('#reqNo').val())
 	        },
+	        async: false,
 			success : function(result) {
 				reqUpdatedHist = result;
 			},
@@ -708,6 +715,7 @@ function updateReqHist(rsNoDone, rsNoStart, rsNoStartLastTag){
 	        data: {
 	        	param: JSON.stringify(obj)
 	        },
+	        async: false,
 			success : function(result) {
 				reqHist = result;
 			},
