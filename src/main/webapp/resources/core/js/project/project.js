@@ -534,7 +534,7 @@ function approveProject(){
 			success : function(result) {
 				if(result == 'success'){
 					disableProjSave(true);
-					createVM();
+//					createVM();
 				}
 			},
 		});

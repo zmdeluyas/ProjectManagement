@@ -68,7 +68,7 @@
 <script src="${attachmentjs}"></script>
 <script src="${deploymentlistjs}"></script>
 </head>
-<body class="backgroundImage">
+<body>
 <div id="main-header">
 	<jsp:include page="common/header.jsp"></jsp:include>
 </div>
