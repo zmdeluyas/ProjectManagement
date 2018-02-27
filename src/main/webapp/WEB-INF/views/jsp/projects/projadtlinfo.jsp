@@ -304,7 +304,17 @@
 	initDatePicker();
 	initCurrency();
 	initProjBtn();
+	
+	// Added by Bryan
+	$('#psdPicker').on('dp.hide', function(e){
+ 		$('#projASD').val($('#projPSD').val());
+	});
+		
+	$('#pfdPicker').on('dp.hide', function(e){
+		$('#projACD').val($('#projPFD').val());
+	});
 </script>
+
 <jsp:include page="popup/projRegPopup.jsp"></jsp:include>
 <jsp:include page="popup/projOSPopup.jsp"></jsp:include>
 <jsp:include page="popup/projMiddlewarePopup.jsp"></jsp:include>

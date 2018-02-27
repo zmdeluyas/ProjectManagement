@@ -106,7 +106,10 @@ function initProjPopupDt(){
 		var rowData = $projlistpopupdt.row(this).data();
 		$projlistpopupdt.$('tr.selected').removeClass('selected');
 		$('#projListPopupModal').modal('toggle');
-		projPopupActions(rowData.projNo);
+		//Added by Bryan
+		setTimeout(function(){ 
+			projPopupActions(rowData.projNo);
+		}, 1000);
 	});
 	
 	
@@ -134,8 +137,12 @@ function initPLPopupBtn(){
 		
 		$('#projListPopupModal').modal('toggle');
 		$('.modal-backdrop').removeClass();
-		createProjRequest();
-		$back.removeClass('hide');
+		
+		//Added by Bryan
+		setTimeout(function(){ 
+			createProjRequest();
+			$back.removeClass('hide');
+		}, 1000);
 	});
 	
 	
