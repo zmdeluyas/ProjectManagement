@@ -33,8 +33,9 @@ public class JenkinsService {
 			System.out.println(">>>>> INISIDE VM CREATION<<<<<<<<<<");
 			URL url = new URL(baseUrl+"/job/CREATE_VM_VAGRANT/buildWithParameters");
 			String user = "admin"; // username
-			String pass = "fbb6b381ef4e8897f2e0341234f38800"; // password or API
+			//String pass = "fbb6b381ef4e8897f2e0341234f38800"; // password or API
 																// token
+			String pass = "bbe8371cd3dad91fe25a694fb3113bb2";
 			String authStr = user + ":" + pass;
 			String encoding = DatatypeConverter.printBase64Binary(authStr.getBytes("utf-8"));
 
