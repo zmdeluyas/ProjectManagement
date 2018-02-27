@@ -39,6 +39,13 @@ public class JenkinsController {
 		return resp.getRespMessage();
 	}
 	
+	@RequestMapping(value = "/jenkins/deploy/status", method = RequestMethod.POST)
+	@ResponseBody
+	public String updatetatus(@RequestParam("reqNo") String reqNo, @RequestParam("currRsNo") Integer currRsNo){
+		ExceptionResolver resp = jenkinsService.updateReqStatus(reqNo, currRsNo);
+		return resp.getRespMessage();
+	}
+	
 	@RequestMapping(value = "/jenkins/create/qa", method = RequestMethod.GET)
 	@ResponseBody 
 	public String triggerCreateQAEnvironment(@RequestParam Integer projNo){

@@ -5,6 +5,9 @@ public class ReqStatusParam {
 	private String reqNo;
 	private Integer currRsNo;
 	
+	public ReqStatusParam() {
+		super();
+	}
 	public ReqStatusParam(String reqNo, Integer currRsNo) {
 		this.reqNo = reqNo;
 		this.currRsNo = currRsNo;

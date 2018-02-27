@@ -58,17 +58,28 @@ function initDeploymentButtons(){
 		$("#reqSaveBtn").addClass("hide");
 	}
 	
-//	$("#btnDeploy").click(function(){
-//		$.ajax({
-//			url: contextPath + "/deployments/save",
-//			method: "POST",
-//			data : { },
-//			async: false,
-//			success: function(){
-//				
-//			}
-//		});
-		
-//	});
+	$("#btnDeploy").click(function(){
+		var host = $("#txtHostAddress").val();
+		var port = $("#txtHostPort").val();
+		var userame = $("#txtWsUsername").val();
+		var password = $("#txtWsPassword").val();
+		if((host == "" || host == null) || (port == "" || port == null) || (username == "" || username == null) || (password == "" || password == null)){
+			alert("Please fill out all fields!!");
+		} else {
+			//var param = {"reqNo":$("#reqNo").val(),"currRsNo":9};
+			$.ajax({
+				url: contextPath + "/jenkins/deploy/status",
+				method: "POST",
+				data : {
+					reqNo: $("#reqNo").val(),
+					currRsNo: 9
+				},
+				async: false,
+				success: function(){
+					
+				}
+			});
+		}
+	});
 }
 

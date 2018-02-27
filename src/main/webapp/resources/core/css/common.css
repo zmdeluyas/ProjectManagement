@@ -1,6 +1,8 @@
 body {
 	font-family: 'Calibri';
 	overflow: scroll !important;
+	background-color: #97d7e5;
+	padding-right:0px important!;
 }
 
 .main .navbar-brand {
@@ -341,7 +343,11 @@ span.date {
 	background-color: #e1e8f2;
 }
 
-.backgroundImage {
-	background-image: url('/ProjectManagement/resources/core/css/images/backgroundImage.jfif');
-	background-size: 100%;
+.modal {
+    overflow-y: auto !important;
+}
+
+.modal-open, .modal-open[style] {
+    overflow: auto !important;
+    padding-right: 0px !important;
 }

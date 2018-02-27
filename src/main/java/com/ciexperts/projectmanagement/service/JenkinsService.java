@@ -25,7 +25,7 @@ public class JenkinsService {
 	private RequestService reqService = new RequestService();
 	private UserService userService = new UserService();
 	private ExceptionResolver exception;
-	private static String baseUrl = "http://192.10.10.221:8080";
+	private static String baseUrl = "http://192.10.10.240:8080";
 	
 	public String triggerVMCreation(VMConfig vmCon, JenkinsRepoParam repoParam, String reqNo){
 		String result = null;
