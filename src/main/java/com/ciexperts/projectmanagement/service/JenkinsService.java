@@ -1,14 +1,15 @@
 package com.ciexperts.projectmanagement.service;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.List;
 
-import javax.xml.bind.DatatypeConverter;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Form;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import com.ciexperts.projectmanagement.entity.Deploy;
 import com.ciexperts.projectmanagement.entity.JenkinsRepoParam;
 import com.ciexperts.projectmanagement.entity.Project;
 import com.ciexperts.projectmanagement.entity.ProjectInfra;
@@ -25,88 +26,88 @@ public class JenkinsService {
 	private RequestService reqService = new RequestService();
 	private UserService userService = new UserService();
 	private ExceptionResolver exception;
-	private static String baseUrl = "http://192.10.10.240:8080";
+	private WebTarget webTarget;
+	private Client client = ClientBuilder.newClient();
 	
-	public String triggerVMCreation(VMConfig vmCon, JenkinsRepoParam repoParam, String reqNo){
-		String result = null;
-		try {
-			System.out.println(">>>>> INISIDE VM CREATION<<<<<<<<<<");
-			URL url = new URL(baseUrl+"/job/CREATE_VM_VAGRANT/buildWithParameters");
-			String user = "admin"; // username
-			//String pass = "fbb6b381ef4e8897f2e0341234f38800"; // password or API
-																// token
-			String pass = "bbe8371cd3dad91fe25a694fb3113bb2";
-			String authStr = user + ":" + pass;
-			String encoding = DatatypeConverter.printBase64Binary(authStr.getBytes("utf-8"));
-
-			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-			connection.setRequestMethod("POST");
-			connection.setDoOutput(true);
-			connection.setRequestProperty("Authorization", "Basic " + encoding);
-			
-			//String urlParams = "PROJECT_NAME="+repoParam.getProjName()+"&DEV_EMAIL="+repoParam.getAssignedDev()+"&BA_EMAIL="+repoParam.getAssignedBa()+"&QA_EMAIL="+repoParam.getAssignedQa()+"&PM_EMAIL="+repoParam.getAssignedPm()+"&OPERATING_SYS="+vmCon.getOperatingSys().toLowerCase()+"&RECIPIENTS="+repoParam.getAssignedDev()+","+repoParam.getAssignedBa()+","+repoParam.getAssignedQa()+","+repoParam.getAssignedPm()+"&MEMORY="+vmCon.getMemory()+"&CPU="+vmCon.getCpu()+"&APPLICATION="+vmCon.getApp().toLowerCase()+"&MIDDLE_WARE="+vmCon.getMiddleWare().toLowerCase()+"&PROJECT_LINK="+repoParam.getProjLink()+"&PACKAGE_NAME="+repoParam.getProjName().toLowerCase();
-			String urlParams = "PROJECT_NAME="+repoParam.getProjName()+"&DEV_EMAIL="+repoParam.getAssignedDev()+"&BA_EMAIL="+repoParam.getAssignedBa()+"&QA_EMAIL="+repoParam.getAssignedQa()+"&PM_EMAIL="+repoParam.getAssignedPm()+"&PROJ_NUMBER="+repoParam.getProjNo()+"&REQ_NO="+reqNo+"&OPERATING_SYS="+vmCon.getOperatingSys().toLowerCase()+"&MEMORY="+vmCon.getMemory()+"&CPU="+vmCon.getCpu()+"&APPLICATION="+vmCon.getApp().toLowerCase()+"&MIDDLE_WARE="+vmCon.getMiddleWare().toLowerCase();
-			byte[] postData = urlParams.getBytes("utf-8");
-			try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
-				wr.write(postData);
-			}
-
-			InputStream content = connection.getInputStream();
-			BufferedReader in = new BufferedReader(new InputStreamReader(content));
-			String line;
-			while ((line = in.readLine()) != null) {
-				System.out.println(line);
-			}
-			
-			result = "success";
-		} catch (Exception e) {
-			result = "failed";
-			e.printStackTrace();
-		}
+	
+	/*
+	 * TRIGGER CREATE_VM_VAGRANT JOB IN JENKIS
+	 * BY AALOVERIA
+	 */
+	public Response createVirtualMachine(VMConfig vmCon, JenkinsRepoParam repoParam, String reqNo, String url, String authPassword){
 		
-		return result;
+		webTarget = client.target(url).path("buildByToken").path("buildWithParameters")
+				.queryParam("job", "CREATE_VM_VAGRANT").queryParam("token",authPassword);
+		System.out.println("Inside create VM >>>>>>>>>>>> assignedOM " + repoParam.getAssignedOm());
+		Form form = new Form();
+		form.param("PROJECT_NAME", repoParam.getProjName());
+		form.param("DEV_EMAIL", repoParam.getAssignedDev());
+		form.param("BA_EMAIL", repoParam.getAssignedBa());
+		form.param("QA_EMAIL", repoParam.getAssignedQa());
+		form.param("PM_EMAIL", repoParam.getAssignedPm());
+		form.param("OM_EMAIL", repoParam.getAssignedOm());
+		form.param("PROJ_NUMBER", repoParam.getProjNo());
+		form.param("REQ_NO", reqNo);
+		form.param("OPERATING_SYS", vmCon.getOperatingSys().toLowerCase());
+		form.param("MEMORY", vmCon.getMemory());
+		form.param("CPU", vmCon.getCpu());
+		form.param("APPLICATION", vmCon.getApp().toLowerCase());
+		form.param("MIDDLE_WARE",vmCon.getMiddleWare().toLowerCase());
+		
+		return webTarget.request(MediaType.APPLICATION_JSON)
+				.post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED_TYPE));
 	}
 	
-	public String triggerCreateQAEnvironment(Integer projNo){
+	/*
+	 * TRIGGER CREATE_QA_ENVIRONMENT JOB IN JENKIS
+	 * BY AALOVERIA
+	 */
+	public Response createQAEnvironment(Integer projNo, String url, String authPassword){
+		
 		Request reqInfo = reqService.getReqByProjNo(projNo);
 		User qaInfo = userService.findUser(reqInfo.getAssignedQA());
 		Project projInfo = projService.getProjInfoByNo(projNo);
 		ProjectInfra projInfra = projService.getProjInfraByProjNo(projNo);
-		String result = null;
-		try {
-			System.out.println(">>>>> INISIDE QA VM CREATION<<<<<<<<<<");
-			URL url = new URL(baseUrl+"/job/CREATE_QA_ENVIRONMENT/buildWithParameters");
-			String user = "admin"; // username
-			String pass = "fbb6b381ef4e8897f2e0341234f38800"; // password or API token
-																
-			String authStr = user + ":" + pass;
-			String encoding = DatatypeConverter.printBase64Binary(authStr.getBytes("utf-8"));
-
-			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-			connection.setRequestMethod("POST");
-			connection.setDoOutput(true);
-			connection.setRequestProperty("Authorization", "Basic " + encoding);
-			
-			//String urlParams = "PROJECT_NAME="+repoParam.getProjName()+"&DEV_EMAIL="+repoParam.getAssignedDev()+"&BA_EMAIL="+repoParam.getAssignedBa()+"&QA_EMAIL="+repoParam.getAssignedQa()+"&PM_EMAIL="+repoParam.getAssignedPm()+"&OPERATING_SYS="+vmCon.getOperatingSys().toLowerCase()+"&RECIPIENTS="+repoParam.getAssignedDev()+","+repoParam.getAssignedBa()+","+repoParam.getAssignedQa()+","+repoParam.getAssignedPm()+"&MEMORY="+vmCon.getMemory()+"&CPU="+vmCon.getCpu()+"&APPLICATION="+vmCon.getApp().toLowerCase()+"&MIDDLE_WARE="+vmCon.getMiddleWare().toLowerCase()+"&PROJECT_LINK="+repoParam.getProjLink()+"&PACKAGE_NAME="+repoParam.getProjName().toLowerCase();
-			String urlParams = "PROJECT_NAME="+projInfo.getName()+"&OPERATING_SYS="+projInfra.getOs().toLowerCase()+"&RECIPIENTS="+qaInfo.getEmail()+"&CPU="+projInfra.getCpuMemory().substring(0, projInfra.getCpuMemory().indexOf("CPU/s"))+"&MEMORY="+projInfra.getCpuMemory().substring(projInfra.getCpuMemory().indexOf("s,") + 3)+"&APPLICATION="+projInfra.getApplication().toLowerCase()+"&MIDDLE_WARE="+projInfra.getMiddleware().toLowerCase();
-			byte[] postData = urlParams.getBytes("utf-8");
-			try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
-				wr.write(postData);
-			}
-
-			InputStream content = connection.getInputStream();
-			BufferedReader in = new BufferedReader(new InputStreamReader(content));
-			String line;
-			while ((line = in.readLine()) != null) {
-				System.out.println(line);
-			}
-			result = "success";
-		} catch (Exception e) {
-			result = "failed";
-			e.printStackTrace();
-		}
 		
-		return result;
+		webTarget = client.target(url).path("buildByToken").path("buildWithParameters")
+				.queryParam("job", "CREATE_QA_ENVIRONMENT").queryParam("token",authPassword);
+		
+		Form form = new Form();
+		form.param("PROJECT_NAME", projInfo.getName());
+		form.param("OPERATING_SYS", projInfra.getOs().toLowerCase());
+		form.param("RECIPIENTS", qaInfo.getEmail());
+		form.param("CPU", projInfra.getCpuMemory().substring(0, projInfra.getCpuMemory().indexOf("CPU/s")));
+		form.param("MEMORY", projInfra.getCpuMemory().substring(projInfra.getCpuMemory().indexOf("s,") + 3));
+		form.param("APPLICATION", projInfra.getApplication().toLowerCase());
+		form.param("MIDDLE_WARE", projInfra.getMiddleware().toLowerCase());
+		
+		
+		return webTarget.request(MediaType.APPLICATION_JSON)
+				.post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED_TYPE));
+	}
+	
+	/*
+	 * Trigger Deploy JOB in JENKINS
+	 * By AALOVERIA
+	 */
+	public Response triggerDeploy(Deploy deploy, String url, String authPassword) {
+		
+		webTarget = client.target(url).path("buildByToken").path("buildWithParameters")
+				.queryParam("job", "DEPLOY").queryParam("token",authPassword);
+		
+		Form form = new Form();
+		form.param("HOST_ADDRESS", deploy.getHost());
+		form.param("HOST_PORT", deploy.getPort());
+		form.param("USERNAME", deploy.getUsername());
+		form.param("PASSWORD", deploy.getPassword());
+		form.param("CONTEXT_PATH", deploy.getContextPath());
+		form.param("PROJECT_NAME", deploy.getProjName());
+		form.param("REQ_NO", deploy.getReqNo());
+		form.param("VERSION", deploy.getVersion());
+		form.param("OM_EMAIL", deploy.getOmEmail());
+
+		return webTarget.request(MediaType.APPLICATION_JSON)
+				.post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED_TYPE));
 	}
 	
 	public ExceptionResolver updateReqStatus(String paramReqNo, Integer currRsNo){
@@ -117,6 +118,7 @@ public class JenkinsService {
 		Integer rhNo = null;
 		String nextRsLastTag = "";
 		String prevReqStatus = "";
+		Boolean isNextRsExist = false;
 		
 		try {
 			reqNo = Integer.parseInt(paramReqNo);
@@ -132,6 +134,10 @@ public class JenkinsService {
 				if (reqHistList.get(i).getRsNo() == currRsNo) {
 					rhNo = reqHistList.get(i).getRhNo();
 				}
+				
+				if (reqHistList.get(i).getRsNo() == nextRsNo){
+					isNextRsExist = true;
+				}
 	
 			}
 			
@@ -143,7 +149,7 @@ public class JenkinsService {
 			}
 			
 			if (!(prevReqStatus.equals("On-going"))) {
-				reqService.saveReqHist(reqNo, rhNo, currRsNo, nextRsNo, nextRsLastTag);
+				reqService.saveReqHist(reqNo, rhNo, currRsNo, nextRsNo, nextRsLastTag, isNextRsExist);
 				exception.setRespResult("success");
 				exception.setRespMessage("Reqeuest status updated successfully ");
 			} else {
@@ -158,5 +164,4 @@ public class JenkinsService {
 		}
 		return exception;
 	}
-
 }

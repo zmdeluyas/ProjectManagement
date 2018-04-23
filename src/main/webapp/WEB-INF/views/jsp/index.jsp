@@ -44,6 +44,7 @@
 <spring:url value="/resources/core/js/request/request.js" var="requestjs" />
 <spring:url value="/resources/core/js/attachment/attachment.js" var="attachmentjs" />
 <spring:url value="/resources/core/js/deployment/deploymentlist.js" var="deploymentlistjs" />
+<spring:url value="/resources/core/js/jenkins/jenkins.js" var="jenkinsjs" />
 <script language="Javascript">
 	var contextPath = "${pageContext.request.contextPath}";
 </script>
@@ -67,6 +68,7 @@
 <script src="${requestjs}"></script>
 <script src="${attachmentjs}"></script>
 <script src="${deploymentlistjs}"></script>
+<script src="${jenkinsjs}"></script>
 </head>
 <body>
 <div id="main-header">

@@ -160,10 +160,11 @@ function initReqInfo(){
 			   if($('#projTotBudget').val() == '0') {
 				message = message + "\n\nNote: You have 0.00 balance as your total budget for the project.";
 			}
+			$("#reqUpdateBtn").hide();
 			approveRequest();
 			sendEmailReq($('#reqNo').val(), message);
 		}   
-		$("#reqUpdateBtn").hide();
+		//$("#reqUpdateBtn").hide();
 	});
 
 } 
@@ -382,7 +383,7 @@ function populateReqInfo(req){
 	$('#assignedDevEmail').val(nvl(req.devMail,''));
 	$('#assignedBAEmail').val(nvl(req.baMail,''));
 	$('#assignedQAEmail').val(nvl(req.qaMail,''));
-	$('#assignedOPEmail').val(nvl(req.opEmail,'')); // SHARIE
+	$('#assignedOPsEmail').val(nvl(req.opMail,'')); // SHARIE
 	$('#reqDesc').val(unescapeHTML(nvl(req.desc, '')));
 	$('#reqRemarks').val(unescapeHTML(nvl(req.remarks, '')));
 	$('#reqRequestor').val(unescapeHTML(nvl(req.requestor, '')));

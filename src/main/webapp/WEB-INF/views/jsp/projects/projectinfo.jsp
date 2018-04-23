@@ -1,7 +1,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="container" id="projinfo-div">
 	<div class="panel panel-primary box">
-		<div class="panel-heading box">Project Information</div>
+		<div class="panel-heading box">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="col-sm-6">
+						Project Information
+					</div>
+					<div class="col-sm-6">
+						<button id="createNewProj" class="btn btn-default btn-md hide pull-right">New Project</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="panel-body bodyBackground">
 			<div class= "container-fluid">
 				<div class="row margin-left-35 margin-right-minus-35">

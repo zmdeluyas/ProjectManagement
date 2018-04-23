@@ -145,7 +145,9 @@ function initPLPopupBtn(){
 		}, 1000);
 	});
 	
-	
+	$("#createNewProj").click(function(){
+		createProjRequest();
+	});
 }
 
 function initPeriodList(){
@@ -682,28 +684,4 @@ function initPHPopupBtn(){
 			}
 		}
 	});
-}
-
-function prepareProjParameter(){
-	var repoParam = {};
-	
-	repoParam.projName = $("#projName").val().replace(/ /g, "-");
-	repoParam.assignedDev = $("#assignedDevEmail").val();
-	repoParam.assignedBa = $("#assignedBAEmail").val();
-	repoParam.assignedQa = $("#assignedQAEmail").val();
-	repoParam.assignedPm = $("#assignedPmEmail").val();
-	repoParam.projNo = $("#projNo").val();
-	return repoParam;
-}
-
-function prepareVMParameter(){
-	var vmConfig = {};
-	
-	vmConfig.operatingSys = $("#projOS").val();
-	vmConfig.middleWare = $("#projMW").val();
-	vmConfig.cpu = $("#projCPU").val();
-	vmConfig.app = $("#projApp").val();
-	vmConfig.memory = $("#projMemory").val();
-	
-	return vmConfig;
 }
