@@ -204,27 +204,33 @@
 				<div class="panel-body">
 					<div class="container-fluid">
 						<div class="row top10">
-							<div class="col-xs-12">
+							<div class="col-xs-7">
 								<label for="hostAddress" class="top5 common-label"
-									style="width: 26% !important;">Host Address</label> <input
+									style="width: 46.8% !important;">Host Address</label> <input
 									id="txtHostAddress" type="text"
 									class="form-control common-input common-editable-fields"
-									placeholder="Ex: 192.168.56.33" />
+									placeholder="Ex: 192.168.56.33" style="width: 52%;"/>
+							</div>
+							<div class="col-xs-5">
+								<label for="hostPort" class="top5 common-label"
+									style="width: 37% !important;">Host Port</label> <input
+									id="txtHostPort" type="text"
+									class="form-control common-input common-editable-fields"
+									placeholder="Ex: 8080" style="width: 60%" />
 							</div>
 						</div>
 						<div class="row top10">
-							<div class="col-xs-6">
-								<label for="hostPort" class="top5 common-label"
-									style="width: 55.7% !important;">Host Port</label> <input
-									id="txtHostPort" type="text"
-									class="form-control common-input common-editable-fields"
-									placeholder="Ex: 8080" style="width: 40%" />
-							</div>
-							<div class="col-xs-6">
+							<div class="col-xs-8">
 								<label for="contextPath" class="top5 common-label"
-									style="width: 32% !important;">Context Path</label> <input
-									id="txtContextPath" type="text"
-									class="form-control common-input common-editable-fields" style="width: 65%" />
+									style="width: 40.2% !important;">Context Path</label> <input
+									id="txtContextPath" type="text" style="width: 58%;"
+									class="form-control common-input common-editable-fields" />
+							</div>
+							<div class="col-xs-4">
+								<label for="version" class="top5 common-label"
+									style="width: 37% !important;;">Version</label> <input
+									id="txtVersion" type="text" style="width: 60%"
+									class="form-control common-input common-editable-fields" />
 							</div>
 						</div>
 						<div class="row top10">
@@ -239,7 +245,7 @@
 							<div class="col-xs-12">
 								<label for="wsPass" class="top5 common-label"
 									style="width: 26% !important;">WebServer Password</label> <input
-									id="txtWsPassword" type="text"
+									id="txtWsPassword" type="password"
 									class="form-control common-input common-editable-fields" />
 							</div>
 						</div>
@@ -299,12 +305,41 @@
 		</div>
 	</div>
 </div>
+<div id="deploymentSuccess" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="deploymentSuccess" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <button id="closeDeployPopup" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+        <h4 class="modal-title" id="gridSystemModalLabel">Deployment</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-12" id="deployProjNo">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="closeDeployPopup" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <jsp:include page="popup/upload.jsp"></jsp:include>
 <script>
 	initDatePicker();
 	initCurrency();
 	initProjBtn();
+	
+	// Added by Bryan
+	$('#psdPicker').on('dp.hide', function(e){
+ 		$('#projASD').val($('#projPSD').val());
+	});
+		
+	$('#pfdPicker').on('dp.hide', function(e){
+		$('#projACD').val($('#projPFD').val());
+	});
 </script>
+
 <jsp:include page="popup/projRegPopup.jsp"></jsp:include>
 <jsp:include page="popup/projOSPopup.jsp"></jsp:include>
 <jsp:include page="popup/projMiddlewarePopup.jsp"></jsp:include>

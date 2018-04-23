@@ -51,6 +51,22 @@ function initDeploymentList(){
 	$back.removeClass('hide');
 }*/
 
+function prepareDeployParameters(){
+	var deploy = {};
+	
+	deploy.host = $("#txtHostAddress").val();
+	deploy.port = $("#txtHostPort").val();
+	deploy.username = $("#txtWsUsername").val();
+	deploy.password = $("#txtWsPassword").val();
+	deploy.contextPath = $("#txtContextPath").val();
+	deploy.projName = $("#projName").val().replace(/ /g,"");
+	deploy.reqNo = $("#reqNo").val();
+	deploy.omEmail = $("#assignedOPsEmail").val();
+	deploy.version = $("#txtVersion").val();
+	
+	return deploy;
+}
+
 function initDeploymentButtons(){
 	if (useraccess == "op"){
 		$("#btnDeploy").removeAttr("disabled");
@@ -59,24 +75,30 @@ function initDeploymentButtons(){
 	}
 	
 	$("#btnDeploy").click(function(){
-		var host = $("#txtHostAddress").val();
-		var port = $("#txtHostPort").val();
-		var userame = $("#txtWsUsername").val();
-		var password = $("#txtWsPassword").val();
-		if((host == "" || host == null) || (port == "" || port == null) || (username == "" || username == null) || (password == "" || password == null)){
+		var deploy = prepareDeployParameters();
+		if((deploy.host == "" || deploy.host == null) || (deploy.port == "" || deploy.port == null) || (deploy.username == "" || deploy.username == null) || (deploy.password == "" || deploy.password == null) || (deploy.contextPath == "" || deploy.contextPath == null)){
 			alert("Please fill out all fields!!");
 		} else {
-			//var param = {"reqNo":$("#reqNo").val(),"currRsNo":9};
 			$.ajax({
-				url: contextPath + "/jenkins/deploy/status",
+				url: contextPath + "/jenkins/deploy",
 				method: "POST",
-				data : {
-					reqNo: $("#reqNo").val(),
-					currRsNo: 9
-				},
+				data : deploy,
 				async: false,
-				success: function(){
-					
+				success: function(result){
+					if(result = 'success'){
+						$('#deployProjNo').html('Request No. ' + $('#reqNo').val() + ' is now being deploy..');
+					}else{
+						$('#deployProjNo').html('Deploying Request No. ' + $('#projNo').val() + '  failed!');
+					}
+					$('#deploymentSuccess').modal('show');
+					$("#closeDeployPopup").click(function (){
+						$('#deploymentSuccess').modal('hide');
+						$('body').removeClass('modal-open');
+						$("body").removeAttr('style');
+						$('.modal-backdrop').remove();
+						loadMainPage();
+						loadProjectList();
+					});
 				}
 			});
 		}

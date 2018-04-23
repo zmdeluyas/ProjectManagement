@@ -17,6 +17,7 @@ function loadProjInfo(afterDiv, projNo, page){
 					$afterdiv.after(result);
 				}else{
 					$main_body.html(result);
+					$('#createNewProj').removeClass("hide");
 					//loadProjPlanPeriod('projinfo-div');
 				}
 				if(projNo != null && 'openReqInfo' == page){
@@ -219,7 +220,7 @@ function initAddProjInfo(){
 		$('#seachStatus').removeClass('hide');
 		$('#projDescEditor').removeClass('hide');
 	}
-	
+	$('#createNewProj').addClass("hide");
 }
 
 function loadProjAdtlInfo(afterDiv, projNo){
@@ -891,26 +892,4 @@ function makeFieldsUneditable(action) {
 	$('#projCostDtls').prop('disable', true);
 	//
 	$('#projRemarks').prop('readonly', true);	
-}
-
-function createVM(){
-	var vmConfigParam = prepareVMParameter();
-	var repParam = prepareProjParameter();
-		$.ajax({
-		url: contextPath + '/jenkins/vmcreation',
-		method: "POST",
-		data: {
-			vmConfig: JSON.stringify(vmConfigParam),
-			repoParam: JSON.stringify(repParam),
-			reqNo: $('#reqNo').val()
-		},
-		async: false,
-		success: function(response){
-			if(response == "success"){
-				console.log("creating repository....");
-			} else{
-				console.log(false);
-			}	
-		}
-	});
 }

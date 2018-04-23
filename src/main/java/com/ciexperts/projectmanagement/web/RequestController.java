@@ -139,7 +139,7 @@ public class RequestController {
 		Integer rsNoDone = new Integer(params.get("rsNoDone").toString());
 		Integer rsNoStart = new Integer(params.get("rsNoStart").toString());
 		String rsNoStartLastTag = (String) params.get("rsNoStartLastTag");
-		requestService.saveReqHist(reqNo, rhNo, rsNoDone, rsNoStart, rsNoStartLastTag);
+		requestService.saveReqHist(reqNo, rhNo, rsNoDone, rsNoStart, rsNoStartLastTag,false);
 		return (List<RequestHistory>) ResponseFormatter.escapeHTMLInList(requestService.listReqHist(reqNo));
 	}
 

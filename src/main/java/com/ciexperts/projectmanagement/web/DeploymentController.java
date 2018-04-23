@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.ciexperts.projectmanagement.service.AttachmentService;
 import com.ciexperts.projectmanagement.service.DeploymentService;
 import com.ciexperts.projectmanagement.tools.ResponseFormatter;
@@ -25,11 +26,7 @@ public class DeploymentController {
 		// model.addObject("projectList", gson.toJson(ResponseFormatter.escapeHTMLInList(projectService.getProjList("list"))));
 		//	EDIT: RJVILLARUZ
 		model.addObject("deploymentList", gson.toJson(ResponseFormatter.escapeHTMLInList(deploymentService.getListForDeployment())));
-		return model;
-	}
-	
-	@RequestMapping(value = "/deployment/page", method = RequestMethod.POST)
-	public void saveDeployedRequest(){
 		
+		return model;
 	}
 }

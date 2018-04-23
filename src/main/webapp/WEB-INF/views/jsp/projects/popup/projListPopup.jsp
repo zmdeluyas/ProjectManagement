@@ -20,9 +20,9 @@
         </div>
       </div>
       <div class="modal-footer">
-      	<button id="newProjPLPbtn" type="button" class="btn btn-primary">New Project</button>
-        <button id="okPLPbtn" type="button" class="btn btn-info">Ok</button>
-        <button id="closePLP" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      	<!-- <button id="newProjPLPbtn" type="button" class="btn btn-primary">New Project</button> -->
+        <button id="okPLPbtn" type="button" class="btn btn-info">Open Project</button>
+        <button id="closePLP" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

@@ -150,7 +150,7 @@ public class RequestService {
 		Mailer.send(recipient,subject,message,sender,password);
 	}
 	
-	public void saveReqHist(Integer reqNo, Integer rhNo, Integer rsNoDone, Integer rsNoStart, String rsNoStartLastTag){
+	public void saveReqHist(Integer reqNo, Integer rhNo, Integer rsNoDone, Integer rsNoStart, String rsNoStartLastTag, Boolean isNextRsExist){
 		SimpleDateFormat sf = new SimpleDateFormat(Util.dbDateFormat);
 		String dateNow = sf.format(new Date()); 
 		RequestHistory firstReqHist = new RequestHistory();
@@ -162,17 +162,19 @@ public class RequestService {
 		firstReqHist.setLastUpdate(dateNow);
 		requestDao.updateReqHist(firstReqHist);
 		
-		RequestHistory secondReqHist = new RequestHistory();
-		secondReqHist.setReqNo(reqNo);
-		secondReqHist.setRsNo(rsNoStart);
-		secondReqHist.setStartDate(dateNow);
-		secondReqHist.setStatus("On-going");
-		if("Y".equals(rsNoStartLastTag)){
-			firstReqHist.setEndDate(dateNow);
-			secondReqHist.setStatus("Completed");
-		}
-		secondReqHist.setLastUpdate(dateNow);
-		requestDao.insertRequestHistory(secondReqHist);
+		if(!isNextRsExist){
+			RequestHistory secondReqHist = new RequestHistory();
+			secondReqHist.setReqNo(reqNo);
+			secondReqHist.setRsNo(rsNoStart);
+			secondReqHist.setStartDate(dateNow);
+			secondReqHist.setStatus("On-going");
+			if("Y".equals(rsNoStartLastTag)){
+				firstReqHist.setEndDate(dateNow);
+				secondReqHist.setStatus("Completed");
+			}
+			secondReqHist.setLastUpdate(dateNow);
+			requestDao.insertRequestHistory(secondReqHist);
+		} 
 	}
 	
 	public HashMap<String, Object> getRequestInfoByNo(Integer reqNo){

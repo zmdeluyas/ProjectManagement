@@ -7,6 +7,7 @@ public class JenkinsRepoParam {
 	private String assignedBa;
 	private String assignedQa;
 	private String assignedPm;
+	private String assignedOm;
 	private String projNo;
 
 	public String getProjName() {
@@ -57,4 +58,12 @@ public class JenkinsRepoParam {
 		this.projNo = projNo;
 	}
 
+	public String getAssignedOm() {
+		return assignedOm;
+	}
+
+	public void setAssignedOm(String assignedOm) {
+		this.assignedOm = assignedOm;
+	}
+	
 }

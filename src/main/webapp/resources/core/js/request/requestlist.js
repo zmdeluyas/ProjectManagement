@@ -33,7 +33,7 @@ function initRequestList(){
 	     },buttons: [
              {
                  text: 'Create a Request',
-                 className: 'btn-info btn-md',
+                 className: 'btn btn-default btn-md',
                  action: function ( e, dt, node, config ) {
                 	 createRequest();
                  }
