@@ -24,6 +24,7 @@ function loadProjInfo(afterDiv, projNo, page){
 					populateProjInfo(getProjInfByNo(projNo));
 					$('#projNo').removeClass('pad-right-25');
 					$('#seachProj').hide();
+					$('#createNewProj').addClass('hide');
 				}else if(projNo == null && 'addProj' == page){
 					projApproved = 0;
 					initAddProjInfo();
@@ -303,15 +304,24 @@ function insertProj(){
 				projInfra: JSON.stringify(projInfra),
 				projCost: JSON.stringify(projCost)
 			},
+			async: false,
 			success : function(result) {
 				$('#projNo').val(padLeft(result, 6));
 				$('#saveProjNo').html('Project No. ' + padLeft(result, 6) + '  successfully saved!');
 				$('#savingSuccess').modal('toggle');
+				$('#savingSuccess').on('hidden.bs.modal',function(e){
+					e.preventDefault();
+					console.log("closeBUP clicked");
+					setTimeout(function(){
+						loadMainPage();
+						loadRequestList();
+					}, 2000);
+				});
 			},
 		});
-		setTimeout(function(){
+		//setTimeout(function(){
 			insertProjRequest();
-		}, 2000);
+		//}, 2000);
 		
 	} catch (e) {
 		alert( 'insertProj - ' + e);
