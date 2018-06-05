@@ -18,6 +18,7 @@ function loadProjInfo(afterDiv, projNo, page){
 				}else{
 					$main_body.html(result);
 					$('#createNewProj').removeClass("hide");
+					$('#projNo').addClass('common-editable-fields');
 					//loadProjPlanPeriod('projinfo-div');
 				}
 				if(projNo != null && 'openReqInfo' == page){
@@ -25,12 +26,18 @@ function loadProjInfo(afterDiv, projNo, page){
 					$('#projNo').removeClass('pad-right-25');
 					$('#seachProj').hide();
 					$('#createNewProj').addClass('hide');
+					console.log(projApproved);
+					if (projApproved != 1) {
+						$('span > .required').removeClass('hide');
+					}
 				}else if(projNo == null && 'addProj' == page){
 					projApproved = 0;
 					initAddProjInfo();
+					$('.required').removeClass('hide');
 				}else if(projNo != null && 'updateProj' == page){
 					populateProjInfo(getProjInfByNo(projNo));
 					initAddProjInfo();
+					$('.required').removeClass('hide');
 				}
 				//}
 			},
@@ -92,7 +99,6 @@ function getProjAttachmentList(projNo){
 	        async: false,
 			success : function(response) {
 				var obj = JSON.parse(response);
-				//console.log(obj);
 				if(obj.length == 0){
 					 $("#fileDiv").append(
 							 $("<label>No files have been uploaded.</label>"));
@@ -101,7 +107,6 @@ function getProjAttachmentList(projNo){
 					    if ({}.hasOwnProperty.call(obj, k))
 					    	 $("#fileDiv").append(
 					                    $("<tr><td></td></tr>").html(obj[k]));
-					        console.log(k, " = ", obj[k]);
 				}
 				
 			},
@@ -130,7 +135,6 @@ function populateProjInfo(projInfo){
 		}else if ( nvl(projInfo.health, '') == 'On-going' ){
 			$('#projInfoHealth').addClass('health-y');
 		}
-		
 	}else{
 		$('#projNo').val('');
 		$('#createdBy').val('');
@@ -180,26 +184,23 @@ function loadAddProj(){
 }
 
 function loadUpdateProj(projNo){
+	
 	loadProjInfo(null, projNo, 'updateProj');
 	loadProjAdtlInfo('projinfo-div', projNo);
 	makeFieldsUneditable('updateProj');
+	
 	if(useraccess == 'bu'){
-		//makeFieldsUneditable();
 		$('#projInfra').remove();
 		$('#projcost-col').removeClass("col-xs-6");
 		$('#projcost-col').addClass("col-xs-12");
 		$('#projCostStatus').remove();
-		//$('#grpbtnApproval').removeClass('hide');
-		//$('#projSaveBtn').addClass('hide');
 	}
 	if(current_dashboard == 'deployment'){
-		//makeFieldsUneditable();
-		$('#projcost-col').remove();
-		//$('#grpbtnApproval').removeClass('hide');
-		//$('#projSaveBtn').addClass('hide');
+		$('#projcost-col').remove();;
 	}else{
 		$('#deployment-col').remove();
 	}
+	
 	$back.removeClass('hide');
 }
 
@@ -235,7 +236,8 @@ function loadProjAdtlInfo(afterDiv, projNo){
 				//if (checkErrorOnResponse(result)) {
 				if(afterDiv != null){
 					$afterdiv.after(result);
-
+					if (projNo == undefined || projNo == null || projApproved == 0)
+						$('#projadtlinfo-div').find('span.required').removeClass('hide');
 				}else{
 					$main_body.html(result);
 				}
@@ -249,7 +251,6 @@ function loadProjAdtlInfo(afterDiv, projNo){
 	//removed by Ronnie
 	$('#uploadBtn').click(function(){
 		getProjAttachmentList(projNo);
-		//$('#uploadModal').modal('show');
 	});
 	
 }
@@ -265,7 +266,6 @@ function initProjBtn(){
 		if(nvl($('#projNo').val(), '') == ''){
 			insertProj();
 		}else{
-			//var projInfo = getProjInfByNo($('#projNo').val());
 			updateProj();
 		}
 		
@@ -311,7 +311,6 @@ function insertProj(){
 				$('#savingSuccess').modal('toggle');
 				$('#savingSuccess').on('hidden.bs.modal',function(e){
 					e.preventDefault();
-					console.log("closeBUP clicked");
 					setTimeout(function(){
 						loadMainPage();
 						loadRequestList();
@@ -396,7 +395,6 @@ function prepareProjInfo(action){
 }
 //ROCHELLE
 function prepareApprvReqProjInfo(){
-	console.log("inside prepareApprvReqProjInfo");
 	var projInfo = {};
 	if(nvl($('#projNo').val(), '') != ''){
 		projInfo.projNo = $('#projNo').val();
@@ -554,34 +552,13 @@ function approveProject(){
 	}
 }
 
-function createTestJob() {
-	$.ajax({
-		url: contextPath + '/jenkins/test',
-		method: "POST",
-		data: {
-			reqNo    :  $('#reqNo').val()
-		},
-		success: function(response){
-			if(response == "success"){
-				console.log("creating repository....");
-			} else{
-				console.log(false);
-			}	
-		}
-	});
-}
-
 function disableProjSave(disable){
 	var $objSave = $('#projSaveBtn');
 	var $objSubmit = $('#projSubmitBtn');
-	//if(disable && !$objSave.prop('disabled') && !$objSubmit.prop('disabled')){
 	if(disable && !$objSave.prop('disabled')){
 		$objSave.prop('disabled', disable);
-		//$objSubmit.prop('disabled', disable);
 	} else if(!disable && $objSave.prop('disabled')){
-	/*else if(!disable && $objSave.prop('disabled') && $objSubmit.prop('disabled')){*/
 		$objSave.prop('disabled', disable);
-		//$objSubmit.prop('disabled', disable);
 	}
 	
 }
@@ -808,6 +785,7 @@ function makeFieldsUneditable(action) {
 	
 	if (action == 'openReqInfo') {
 		if (projApproved == 1 && req_type == 1) {
+			$('#projNo').removeClass('common-editable-fields');
 			$('#projPSD').prop('readonly', true);
 			$('#projPFD').prop('readonly', true);
 			$('#projASD').prop('readonly', true);
@@ -834,6 +812,7 @@ function makeFieldsUneditable(action) {
 			$('#projMemory').prop('disabled', true);
 		} else {
 			if (useraccess == "bu") {
+				$('#projNo').removeClass('common-editable-fields');
 				$('#seachProjRegion').addClass("hide");
 				$("#seachDeveloper,#searchBA,#searchQA,#searchOPs").addClass("hide");
 				$("#projInfra span").addClass("hide");
@@ -863,6 +842,7 @@ function makeFieldsUneditable(action) {
 		}
 	} else if(action == 'updateProj') {
 		if (projApproved == 1) {
+			$('#projNo').removeClass('common-editable-fields');
 			$('#projPSD').prop('readonly', true);
 			$('#projPFD').prop('readonly', true);
 			$('#projASD').prop('readonly', true);

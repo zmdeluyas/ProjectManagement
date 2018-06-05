@@ -130,11 +130,8 @@ function loadMainPage(){
 function initCommons(){
 	$logo.click(function(){
 		if(useraccess != undefined){
-			console.log(useraccess);
 			loadMainPage();
 			loadProjectList();
-		} else {
-			console.log("Inside else -- " +useraccess);
 		}
 	});
 	$home.click(function(){

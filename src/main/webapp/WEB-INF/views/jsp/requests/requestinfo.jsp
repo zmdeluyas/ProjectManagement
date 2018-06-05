@@ -24,7 +24,7 @@
 						<input id="reqSummary" type="text" class="form-control common-input margin-left-3" style="width: 76% !important;" readonly="readonly">
 					</div>
 					<div class="col-xs-5">
-						<label for="assignedDev" class="top5 common-label" style="width: 40% !important;">Developer Manager</label>
+						<label for="assignedDev" class="top5 common-label" style="width: 40% !important;"><span class="required hide">*</span>Development Manager</label>
 						<input type="hidden" id="assignedDevId" value="">
 						<input type="hidden" id="assignedDevEmail" value="">
 						<input id="assignedDev" type="text" class="form-control common-input" readonly="readonly">
@@ -37,13 +37,13 @@
 						<textarea id="reqDesc" class="form-control common-textarea margin-left-3" style="width: 76% !important;" readonly="readonly"></textarea>
 					</div>
 						<div class="col-xs-5">
-							<label for="assignedBA" class="top5 common-label" style="width: 40% !important;">Business Analyst</label>
+							<label for="assignedBA" class="top5 common-label" style="width: 40% !important;"><span class="required hide">*</span>BA Manager</label>
 							<input type="hidden" id="assignedBAId" value="">
 							<input type="hidden" id="assignedBAEmail" value="">
 							<input id="assignedBA" type="text" class="form-control common-input" readonly="readonly">
 							<span id="searchBA" class="glyphicon glyphicon-search common-search" data-toggle="modal" data-target="#requestBAPopupModal"></span>
 							
-							<label for="assignedQA" class="top5 common-label" style="width: 40% !important;">QA Manager</label>
+							<label for="assignedQA" class="top5 common-label" style="width: 40% !important;"><span class="required hide">*</span>QA Manager</label>
 							<input type="hidden" id="assignedQAId" value="">
 							<input type="hidden" id="assignedQAEmail" value="">
 							<input id="assignedQA" type="text" class="form-control common-input" readonly="readonly" style="margin-top: 7px;">
@@ -59,7 +59,7 @@
 						<input id="reqRemarks" type="text" class="form-control common-input margin-left-3" style="width: 76% !important;" readonly="readonly">
 					</div>
 					<div class="col-xs-5">
-						<label for="assignedOPs" class="top5 common-label" style="width: 40% !important;">Operation Manager</label>
+						<label for="assignedOPs" class="top5 common-label" style="width: 40% !important;"><span class="required hide">*</span>Operation Manager</label>
 						<input type="hidden" id="assignedOPsId" value="">
 						<input type="hidden" id="assignedOPsEmail" value="">
 						<input id="assignedOPs" type="text" class="form-control common-input" readonly="readonly">

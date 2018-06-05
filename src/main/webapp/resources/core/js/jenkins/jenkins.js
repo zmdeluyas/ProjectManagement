@@ -28,7 +28,6 @@ function prepareProjParameter(){
 	repoParam.assignedQa = $("#assignedQAEmail").val();
 	repoParam.assignedPm = $("#assignedPmEmail").val();
 	repoParam.assignedOm = $("#assignedOPsEmail").val();
-	console.log(">>>>"+repoParam.assignedOm);
 	repoParam.projNo = $("#projNo").val();
 	return repoParam;
 }
