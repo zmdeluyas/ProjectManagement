@@ -9,15 +9,10 @@ function createRequest(){
 	req_type = undefined;
 	loadProjInfo(null, null, 'createReq');
 	makeFieldsUneditable('createReq');
-	/*loadProjPlanPeriod('projinfo-div');
-	loadReqInfo('proj-plan-infra');*/
-	//loadReqInfo('projadtlinfo-div'); /* added by SHARIE MANIPON 11.21.2017 */
-	//setFieldsToEditable();
 	$back.removeClass('hide');
 }
 
 function createProjRequest(){
-	console.log('funtion here');
 	loadReqInfo(null, null, 'createProjReq');
 	loadProjInfo('reqinfo-div', null, 'addProj');
 	loadProjAdtlInfo('projinfo-div');
@@ -64,6 +59,11 @@ function loadReqInfo(afterDiv, reqNo, reqType) {
 						if (reqNo != null) {
 							$('#reqinfo-div').find('.panel-heading').html('Request Details');
 							populateReqInfo(getReqInfoByNo(reqNo));
+							
+							if (projApproved != 1) {
+								$('#reqinfo-div').find('span.required').removeClass('hide');
+							}
+							
 							$('#attachDiv').show();
 							if (useraccess == 'pm' && nvl($('#ravBy').val(), '') == '') {
 								// if(useraccess == 'ba' && nvl($('#ravBy').val(), '') == ''){
@@ -104,7 +104,6 @@ function getReqAttachmentList(reqNo){
 				    if ({}.hasOwnProperty.call(obj, k))
 				    	 $("#fileDiv").append(
 				                    $("<tr><td></td></tr>").html(obj[k]));
-				        console.log(k, " = ", obj[k]);
 			},
 		});
 	} catch (e) {
@@ -201,9 +200,7 @@ function sendEmailReq(requestNo, msg){
 					password  : "projectmanagement12345",
 					reqNo	  : requestNo},
 			async: false,
-			success : function(result) {
-				console.log("E-mail successful!");
-			},
+			success : function(result) {},
 		});
 	} catch (e) {
 		alert(e);
@@ -343,20 +340,12 @@ function approveRequest(){
 				//if (checkErrorOnResponse(result)) {
 				if(result == 'success'){
 					if(req_type == 1){
-						console.log("Approve project request >>");
 						approveProject();
-					} /*else {
-						if request is on existing project
-					}*/
+					}
 					disableReqSave(true);
-					//setTimeout(function(){
-						changeReqStatus(2);
-					//},3000)
-					//setTimeout(function(){ //SHA
-						reqStatusTimer();
-					//}, 5000);
+					changeReqStatus(2);
+					reqStatusTimer();
 				}
-				//}
 			},
 		});
 	} catch (e) {
@@ -366,8 +355,6 @@ function approveRequest(){
 
 function populateReqInfo(req){
 	req_type = req.requestType;
-	//req_type = req.requestType;
-	console.log('REQUEST TYPE =' + req_type);
 	$('#reqNo').val(padLeft(nvl(req.reqNo, ''), 8));
 	$('#dateSubmitted').val(nvl(req.dateSubmitted, ''));
 	$('#ravBy').val(nvl(req.ravBy, ''));
@@ -422,7 +409,6 @@ function prepareProjRequestInfo(){
 	req.remarks = 'Project Request';
 	req.requestor = $('#reqRequestor').val();
 	req.requestType = 1;
-	//console.log(req);
 	return req;
 }
 

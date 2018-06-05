@@ -6,7 +6,7 @@
 			<div class="container-fluid">
 				<div class="row" style="margin-left: 0px;">
 					<div class="col-xs-4">
-						<label for="projPSD" class="top5 common-label">Planned
+						<label for="projPSD" class="top5 common-label"><span class="required hide">*</span>Planned
 							Start Date</label>
 						<div class="input-group date date-picker" id="psdPicker">
 							<input id="projPSD" type="text"
@@ -17,7 +17,7 @@
 						</div>
 					</div>
 					<div class="col-xs-4">
-						<label for="projASD" class="top5 common-label">Actual
+						<label for="projASD" class="top5 common-label"><span class="required hide">*</span>Actual
 							Start Date</label>
 						<div class="input-group date date-picker" id="asdPicker">
 							<input id="projASD" type="text"
@@ -40,7 +40,7 @@
 				</div>
 				<div class="row top10" style="margin-left: 0px;">
 					<div class="col-xs-4">
-						<label for="projPFD" class="top5 common-label">Planned
+						<label for="projPFD" class="top5 common-label"><span class="required hide">*</span>Planned
 							Finish Date</label>
 						<div class="input-group date date-picker" id="pfdPicker">
 							<input id="projPFD" type="text"
@@ -51,7 +51,7 @@
 						</div>
 					</div>
 					<div class="col-xs-4">
-						<label for="projACD" class="top5 common-label">Actual
+						<label for="projACD" class="top5 common-label"><span class="required hide">*</span>Actual
 							Complete Date</label>
 						<div class="input-group date date-picker" id="acdPicker">
 							<input id="projACD" type="text"
@@ -85,9 +85,8 @@
 				<div class="panel-body">
 					<div class="container-fluid">
 						<div class="row top10">
-							<div class="col-xs-1"></div>
-							<div class="col-xs-10">
-								<label for="projOS" class="top5 common-label">Operating
+							<div class="col-xs-12">
+								<label for="projOS" class="top5 common-label"><span class="required hide">*</span>Operating
 									System</label> <input id="projOS" type="text"
 									class="form-control common-input common-editable-fields"
 									readonly="readonly"> <span id="seachProjOS"
@@ -96,9 +95,8 @@
 							</div>
 						</div>
 						<div class="row top10">
-							<div class="col-xs-1"></div>
-							<div class="col-xs-10">
-								<label for="projMW" class="top5 common-label">Middleware</label>
+							<div class="col-xs-12">
+								<label for="projMW" class="top5 common-label"><span class="required hide">*</span>Middleware</label>
 								<input id="projMW" type="text"
 									class="form-control common-input common-editable-fields"
 									readonly="readonly"> <span id="seachProjMW"
@@ -107,9 +105,8 @@
 							</div>
 						</div>
 						<div class="row top10">
-							<div class="col-xs-1"></div>
-							<div class="col-xs-10">
-								<label for="projApp" class="top5 common-label">Application</label>
+							<div class="col-xs-12">
+								<label for="projApp" class="top5 common-label"><span class="required hide">*</span>Application</label>
 								<input id="projApp" type="text"
 									class="form-control common-input common-editable-fields"
 									readonly="readonly"> <span id="seachProjApp"
@@ -117,20 +114,11 @@
 									data-toggle="modal" data-target="#projAppPopupModal"></span>
 							</div>
 						</div>
-						<!-- <div class="row top10">
-							<div class="col-xs-1"></div>
-							<div class="col-xs-10">
-								<label for="projRepo" class="top5 common-label">Repository</label>
-								<input id="projRepo" type="text"
-									class="form-control common-input common-editable-fields">
-							</div>
-						</div> -->
 						<div class="row top10">
-							<div class="col-xs-1"></div>
-							<div class="col-xs-5" style="padding-right: 0px; width: 45%">
+							<div class="col-xs-7">
 								<div class="form-group" style="margin-bottom: 4px;">
 									<label for="projCPU" class="top5 common-label"
-										style="width: 48%; margin-bottom: 0px;">CPU/s</label> <select
+										style="width: 47%; margin-bottom: 0px;"><span class="required hide">*</span>CPU/s</label> <select
 										class="form-control common-input" id="projCPU"
 										style="width: 46%;">
 										<option value=""></option>
@@ -150,7 +138,7 @@
 							<div class="col-xs-5">
 								<div class="form-group" style="margin-bottom: 4px;">
 									<label for="projMemory" class="top5 common-label"
-										style="width: 32%; margin-bottom: 0px;">Memory</label> <select
+										style="width: 40%; margin-bottom: 0px;"><span class="required hide">*</span>Memory</label> <select
 										class="form-control common-input" id="projMemory"
 										style="width: 55%;">
 										<option value=""></option>

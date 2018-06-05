@@ -358,3 +358,7 @@ span.date {
     overflow: auto !important;
     padding-right: 0px !important;
 }
+
+.required {
+	color: red;
+}

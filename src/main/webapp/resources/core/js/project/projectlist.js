@@ -128,10 +128,7 @@ function initPLPopupBtn(){
 		$projlistpopupdt.$('tr.selected').removeClass('selected');
 		projPopupActions(rowData.projNo);
 	});
-	console.log('useraccess = ' + useraccess);
-	/*if(useraccess == 'ba'){
-		$('#newProjPLPbtn').attr('disabled', true);
-	}*/
+	
 	// ROCHELLENEW
 	$('#newProjPLPbtn').click(function(){
 		
