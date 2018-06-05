@@ -33,12 +33,12 @@
 				</div>
 				<div class="row top10 margin-left-35 margin-right-minus-35">
 					<div class="col-xs-5">
-						<label for="projName" class="top5 common-label">Project Name</label>
+						<label for="projName" class="top5 common-label"><span class="required hide">*</span> Project Name</label>
 						<input id="projName" type="text" class="form-control common-input" readonly="readonly">
 					</div>
 					<div class="col-xs-1"></div>
 					<div class="col-xs-5">
-						<label for="projManager" class="top5 common-label">Project Manager</label>
+						<label for="projManager" class="top5 common-label"><span class="required hide">*</span> Project Manager</label>
 						<input type="hidden" id="assignedPmEmail">
 						<input id="projManager" type="text" class="form-control common-input common-editable-fields" readonly="readonly">
 						<span id="seachProjManager" class="glyphicon glyphicon-search common-search hide" data-toggle="modal" data-target="#projManagerPopupModal"></span>
@@ -46,13 +46,13 @@
 				</div>
 				<div class="row top10 margin-left-35 margin-right-minus-35">
 					<div class="col-xs-5">
-						<label for="bussinessUnit" class="top5 common-label">Business Unit</label>
+						<label for="bussinessUnit" class="top5 common-label"><span class="required hide">*</span> Business Unit</label>
 						<input id="bussinessUnit" type="text" class="form-control common-input common-editable-fields" readonly="readonly">
 						<span id="seachbusUnit" class="glyphicon glyphicon-search common-search hide" data-toggle="modal" data-target="#businessUModal"></span>
 					</div>
 					<div class="col-xs-1"></div>
 					<div class="col-xs-5">
-						<label for="projStatus" class="top5 common-label">Status</label>
+						<label for="projStatus" class="top5 common-label"><span class="required hide">*</span> Status</label>
 						<input id="projStatus" type="text" class="form-control common-input common-editable-fields" readonly="readonly">
 						<span id="seachStatus" class="glyphicon glyphicon-search common-search hide" data-toggle="modal" data-target="#projStatusPopupModal"></span>
 					</div>
