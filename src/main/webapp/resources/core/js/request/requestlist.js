@@ -110,7 +110,7 @@ function initOPPopUpVariable(){
 	$oppopuptb = "OPPopupTb";
 	popUpOPModal = 'requestOPsPopupModal';
  	assignedOPs = "assignedOPs";
- 	opEmail = "assignedOPEmail"
+ 	opEmail = "assignedOPsEmail"
  	opUserId = "assignedOPsId";
 }
 

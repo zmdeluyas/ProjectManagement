@@ -6,7 +6,7 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">org.sqlite.JDBC</property>
-        <property name="hibernate.connection.url">jdbc:sqlite:file:C:/SMS/db/projmanagement.sqlite</property>
+        <property name="hibernate.connection.url">jdbc:sqlite:file:C:/Users/Administrator/Desktop/DevOps/Database/projmanagement.sqlite</property>
         <!-- <property name="hibernate.connection.url">jdbc:sqlite:projmanagement.sqlite</property> -->
         <property name="hibernate.connection.username"></property>
         <property name="hibernate.connection.password"></property>
